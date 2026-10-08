@@ -1,0 +1,14 @@
+---
+import Base from '@/layouts/Base.astro';
+import ProjectDetail from '@/components/ProjectDetail.astro';
+import { projectPaths, type Project } from '@/lib/projects';
+
+export async function getStaticPaths() {
+  return projectPaths('it');
+}
+const { project } = Astro.props as { project: Project };
+---
+
+<Base title={`${project.data.title} — Riccardo Bedogni`} description={project.data.pitch}>
+  <ProjectDetail project={project} />
+</Base>

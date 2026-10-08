@@ -1,0 +1,175 @@
+---
+/** Case-study page. Minimal in milestone 2 (content review); designed in milestone 4. */
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import type { Project } from '@/lib/projects';
+import { getLocale, localizedPath } from '@/i18n/utils';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+const locale = getLocale(Astro.url);
+---
+
+<article class="container case">
+  <a class="mono back" href={localizedPath('/', locale) + '#work'}>
+    ← {locale === 'it' ? 'Lavori' : 'Work'}
+  </a>
+  <p class="label">
+    {d.kind} · {d.year}
+  </p>
+  <h1 class="display">{d.title}</h1>
+  <p class="pitch">{d.pitch}</p>
+  {d.metrics.length > 0 && (
+    <dl class="metrics">
+      {d.metrics.map((m) => (
+        <div>
+          <dt class="mono">{m.label}</dt>
+          <dd class="display">{m.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+  {d.cover && (
+    <figure>
+      <Image
+        src={d.cover}
+        alt={d.coverAlt ?? ''}
+        widths={[640, 1040, 1440]}
+        sizes="(min-width: 1240px) 1160px, 100vw"
+      />
+    </figure>
+  )}
+  <div class="prose">
+    <Content />
+  </div>
+  <ul class="stack">
+    {d.stack.map((s) => (
+      <li class="mono">{s}</li>
+    ))}
+  </ul>
+  {d.repo && (
+    <p>
+      <a href={d.repo} rel="noopener">
+        GitHub ↗
+      </a>
+    </p>
+  )}
+</article>
+
+<style>
+  .case {
+    display: grid;
+    gap: var(--s-5);
+    padding-block: var(--s-8);
+    max-width: 920px;
+  }
+  .back {
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+  h1 {
+    font-size: var(--step-4);
+  }
+  .pitch {
+    font-size: var(--step-1);
+    line-height: 1.4;
+    max-width: 52ch;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--s-4);
+    margin: 0;
+  }
+  .metrics div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--s-1);
+    padding: var(--s-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+  }
+  dt {
+    color: var(--ink-muted);
+  }
+  dd {
+    margin: 0;
+    font-size: var(--step-2);
+    color: var(--signal);
+  }
+  figure {
+    margin: 0;
+    padding: var(--s-4);
+    background: #fbfaf6;
+    border-radius: var(--radius-m);
+  }
+  figure :global(img) {
+    width: 100%;
+    height: auto;
+  }
+  .prose {
+    max-width: var(--measure);
+  }
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    margin: var(--s-7) 0 var(--s-4);
+  }
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(pre),
+  .prose :global(table),
+  .prose :global(blockquote) {
+    margin: 0 0 var(--s-4);
+  }
+  .prose :global(li) {
+    margin-bottom: var(--s-2);
+  }
+  .prose :global(pre) {
+    padding: var(--s-4);
+    overflow-x: auto;
+    background: var(--bg-sunken) !important;
+    color: var(--ink);
+    border-radius: var(--radius-m);
+    font-size: 0.8rem;
+  }
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+  }
+  .prose :global(table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    padding: var(--s-2) var(--s-3);
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose :global(blockquote) {
+    padding: var(--s-4);
+    border-left: 2px solid var(--signal);
+    background: var(--signal-soft);
+  }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    padding: 0;
+    list-style: none;
+  }
+  .stack li {
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    font-size: 0.75rem;
+  }
+</style>
