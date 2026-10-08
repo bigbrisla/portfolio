@@ -1,0 +1,105 @@
+---
+interface Props {
+  copy: { intro: string; steps: { when: string; title: string; place: string; text: string }[] };
+}
+const { copy } = Astro.props;
+---
+
+<p class="section-intro" data-reveal>
+  {copy.intro}
+</p>
+
+<ol class="traj">
+  {copy.steps.map((s, i) => (
+    <li class="traj__step" data-reveal style={`--reveal-i: ${i}`}>
+      <span class="traj__node" aria-hidden="true" />
+      <p class="traj__when mono">{s.when}</p>
+      <h3 class="traj__title">{s.title}</h3>
+      <p class="traj__place">{s.place}</p>
+      <p class="traj__text">{s.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .traj {
+    --node: 11px;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* the axis: a dashed "similarity" line through every node */
+  .traj::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--node) / 2);
+    border-top: 1px dashed var(--line-strong);
+  }
+  .traj__step {
+    position: relative;
+    display: grid;
+    gap: var(--s-2);
+    align-content: start;
+    padding-top: var(--s-6);
+  }
+  .traj__node {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--node);
+    height: var(--node);
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--ink-muted);
+  }
+  .traj__step:last-child .traj__node {
+    background: var(--signal);
+    border-color: var(--signal);
+    box-shadow: 0 0 0 5px var(--signal-soft);
+  }
+  .traj__when {
+    color: var(--signal);
+  }
+  .traj__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+  .traj__place {
+    font-size: 0.92rem;
+    color: var(--ink-muted);
+  }
+  .traj__text {
+    margin-top: var(--s-2);
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 900px) {
+    .traj {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+      padding-left: var(--s-6);
+    }
+    .traj::before {
+      top: 0;
+      bottom: 0;
+      left: calc(var(--node) / 2);
+      right: auto;
+      border-top: 0;
+      border-left: 1px dashed var(--line-strong);
+    }
+    .traj__step {
+      padding-top: 0;
+    }
+    .traj__node {
+      left: calc(-1 * var(--s-6));
+      top: 0.35rem;
+    }
+  }
+</style>

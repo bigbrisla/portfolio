@@ -1,0 +1,141 @@
+# Home page copy (English). Edit freely; components read this file.
+hero:
+  role: AI Engineer · Data & ML
+  line: I build systems that find what's similar — and measure whether they're right.
+  ctaWork: See the work
+  ctaContact: Get in touch
+  location: Reggio Emilia, IT
+
+trajectory:
+  intro: >-
+    Computer engineering by training, applied AI by trade. The thread running through it is
+    data that has to be matched, retrieved or predicted, and the question of how you know the answer is right.
+  steps:
+    - when: Mar 2025
+      title: AI Engineer Intern
+      place: OT Consulting · Reggio Emilia
+      text: >-
+        My first AI engineering work in a company setting, outside the classroom.
+    - when: Jun 2025 →
+      title: Software Developer & AI Engineer
+      place: OT Consulting · Reggio Emilia
+      text: >-
+        Python and Vue.js day to day, plus machine-learning work.
+    - when: 2026
+      title: Thesis on schema matching
+      place: Supervised by Prof. Beneventano
+      text: >-
+        Making clinical databases talk to each other when their codes are almost — but not
+        exactly — the same. More in the thesis section.
+    - when: Dec 2026
+      title: MSc in Computer Engineering
+      place: University of Modena and Reggio Emilia
+      text: >-
+        Expected graduation, with a thesis in data integration.
+
+work:
+  intro: >-
+    Six projects, each with its evaluation and its limits written down. The numbers come from the
+    repositories, not from memory.
+  featured: Featured
+  upcoming: Coming soon
+  readCase: Read the case study
+  repo: Repository
+  demoSoon: Demo link coming soon
+
+thesis:
+  kicker: Schema matching & data integration
+  title: Two hospitals, one patient, slightly different codes.
+  paragraphs:
+    - >-
+      Hospitals store the same kinds of information in different databases, with different column
+      names. To combine them you first need to know which column in one corresponds to which in the
+      other. That is schema matching. A common way to do it is to look at the values: if two columns
+      contain the same things, they probably mean the same thing.
+    - >-
+      Clinical data makes this harder. Diagnoses are stored as codes from huge medical vocabularies,
+      and real-world coding errors are rarely random. Someone records "chronic kidney disease, stage 5"
+      when it was stage 4: a neighbouring concept, not a typo. To an exact comparison those two are
+      as different as "kidney disease" and "broken arm".
+    - >-
+      My thesis treats the vocabulary as what it is, a hierarchy. Two codes are similar if they are
+      close in that tree. I built a way to generate realistic near-miss errors on OMOP-CDM data and a
+      matcher that compares values by meaning instead of by spelling, then measured both against
+      exact matching on the Valentine benchmark framework.
+  demoTitle: Try it
+  demoNote: >-
+    Toy example to show the idea, not thesis results. Raise the noise: exact matching loses the
+    diagnosis columns, semantic matching keeps them.
+  link: The code behind it
+
+method:
+  intro: >-
+    How I approach a data or ML problem. These aren't rules I read somewhere: each one comes
+    from a mistake I made or caught in my own projects.
+  steps:
+    - title: Decide what "right" means first
+      text: >-
+        Pick the metric from the decision it supports, before touching a model. With 11% positives,
+        accuracy rewards doing nothing, so in the readmission project the metric is AUC-PR and the
+        threshold comes from expected cost.
+    - title: Look for the silent errors in the data
+      text: >-
+        The expensive bugs don't crash. A "None" that means "test not ordered", patients who cannot
+        be readmitted, a parser that quietly returns 114 units instead of 586. I look for them before
+        I train anything.
+    - title: Build the weak baseline
+      text: >-
+        A simple baseline tells you what the clever part is worth. In the RAG project it showed that
+        retrieval and final accuracy come apart, which I would have missed otherwise.
+    - title: Measure the claim, not the vibe
+      text: >-
+        Paired comparisons, confidence intervals, held-out probes for thresholds. If a design can't
+        answer the question, change the design. That's how "the protocol matters" turned into a
+        rejected hypothesis.
+    - title: Write the limits next to the results
+      text: >-
+        Every project ends with what it can't do. A recruiter reading a negative MOTA deserves the
+        explanation in the same place as the number.
+  ai:
+    title: How I use AI at work
+    paragraphs:
+      - >-
+        I use Claude Code every day as a pair programmer: to read unfamiliar code, scaffold the boring
+        parts, write tests and challenge my reasoning. I keep the decisions: what to build, what to
+        measure and when something is wrong.
+      - >-
+        Concretely, that means small reviewed diffs instead of big generated dumps, asking for the
+        failure cases explicitly, and verifying numbers against the source rather than trusting a
+        summary. This site was built that way too, with every figure checked against the repositories.
+    principles:
+      - AI speeds up the typing, not the judgement.
+      - If I can't explain a line, it doesn't ship.
+      - Evaluate LLM features like any other model.
+
+toolkit:
+  intro: Only what shows up in my projects.
+  groups:
+    - name: Languages
+      items: [Python, JavaScript, SQL]
+    - name: ML & Data
+      items:
+        [scikit-learn, pandas, NumPy, XGBoost, SHAP, PyTorch, Ultralytics YOLO, OpenCV, ByteTrack]
+    - name: Retrieval & LLMs
+      items:
+        [Sentence Transformers, ChromaDB, BM25, Cross-encoder reranking, Claude API, RAG evaluation]
+    - name: Backend
+      items: [FastAPI, Pydantic, REST APIs, Telegram bots]
+    - name: Frontend
+      items: [Vue.js, Streamlit, HTML & CSS, Astro]
+    - name: Tools
+      items: [Git, pytest, Jupyter, BigQuery, Make, LaTeX, Claude Code]
+
+contact:
+  title: Let's talk about data that needs to make sense.
+  text: >-
+    Open to conversations about AI engineering and data/ML roles, research collaborations, or a
+    project you'd like a second pair of eyes on.
+  emailLabel: Email
+  copy: Copy
+  copied: Copied
+  cv: Download CV (PDF)

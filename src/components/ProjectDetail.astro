@@ -1,175 +1,285 @@
 ---
-/** Case-study page. Minimal in milestone 2 (content review); designed in milestone 4. */
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
-import type { Project } from '@/lib/projects';
-import { getLocale, localizedPath } from '@/i18n/utils';
+import Glyph from './Glyph.astro';
+import { getProjects, slugOf, type Project } from '@/lib/projects';
+import { getLocale, localizedPath, useTranslations } from '@/i18n/utils';
 
 interface Props {
   project: Project;
 }
 const { project } = Astro.props;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
 const d = project.data;
 const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const slug = slugOf(project);
+
+// prev / next among projects that have a page
+const list = (await getProjects(locale)).filter((p) => p.data.tier !== 'upcoming');
+const i = list.findIndex((p) => slugOf(p) === slug);
+const prev = list[(i - 1 + list.length) % list.length];
+const next = list[(i + 1) % list.length];
+const toc = headings.filter((h) => h.depth === 2);
 ---
 
-<article class="container case">
-  <a class="mono back" href={localizedPath('/', locale) + '#work'}>
-    ← {locale === 'it' ? 'Lavori' : 'Work'}
-  </a>
-  <p class="label">
-    {d.kind} · {d.year}
-  </p>
-  <h1 class="display">{d.title}</h1>
-  <p class="pitch">{d.pitch}</p>
+<article class="case">
+  <header class="case__head container">
+    <a class="case__back mono" href={`${localizedPath('/', locale)}#work`.replace('//', '/')}>
+      ← {t.case.back}
+    </a>
+    <p class="label">
+      {d.kind} · {d.year}
+    </p>
+    <h1 class="case__title display">{d.title}</h1>
+    <p class="case__pitch">{d.pitch}</p>
+    <div class="case__actions">
+      {d.repo && (
+        <a class="btn btn--primary" href={d.repo} rel="noopener">
+          GitHub ↗
+        </a>
+      )}
+      {d.demo && (
+        <a class="btn" href={d.demo} rel="noopener">
+          Demo ↗
+        </a>
+      )}
+    </div>
+  </header>
+
+  <div class="case__visual container">
+    <div class="case__plate">
+      {d.cover ? (
+        <Image
+          src={d.cover}
+          alt={d.coverAlt ?? ''}
+          widths={[640, 1040, 1440, 2000]}
+          sizes="(min-width: 1240px) 1160px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      ) : (
+        <div class="case__glyph" aria-hidden="true">
+          <Glyph seed={slug} score={d.metrics[0]?.value} dense />
+        </div>
+      )}
+    </div>
+  </div>
+
   {d.metrics.length > 0 && (
-    <dl class="metrics">
+    <dl class="case__metrics container">
       {d.metrics.map((m) => (
         <div>
-          <dt class="mono">{m.label}</dt>
+          <dt>{m.label}</dt>
           <dd class="display">{m.value}</dd>
         </div>
       ))}
     </dl>
   )}
-  {d.cover && (
-    <figure>
-      <Image
-        src={d.cover}
-        alt={d.coverAlt ?? ''}
-        widths={[640, 1040, 1440]}
-        sizes="(min-width: 1240px) 1160px, 100vw"
-      />
-    </figure>
-  )}
-  <div class="prose">
-    <Content />
+
+  <div class="case__body container">
+    <aside class="case__aside" aria-label={t.case.details}>
+      {toc.length > 0 && (
+        <nav aria-label={t.case.onThisPage}>
+          <p class="label">{t.case.onThisPage}</p>
+          <ol>
+            {toc.map((h) => (
+              <li>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      {d.stack.length > 0 && (
+        <div>
+          <p class="label">Stack</p>
+          <ul class="case__stack">
+            {d.stack.map((s) => (
+              <li class="tag">{s}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </aside>
+    <div class="prose">
+      <Content />
+    </div>
   </div>
-  <ul class="stack">
-    {d.stack.map((s) => (
-      <li class="mono">{s}</li>
-    ))}
-  </ul>
-  {d.repo && (
-    <p>
-      <a href={d.repo} rel="noopener">
-        GitHub ↗
-      </a>
-    </p>
-  )}
+
+  <nav class="case__pager container" aria-label={t.case.more}>
+    <a href={localizedPath(`/projects/${slugOf(prev)}`, locale)} rel="prev">
+      <span class="label">← {t.case.prev}</span>
+      <span class="display">{prev.data.title}</span>
+    </a>
+    <a href={localizedPath(`/projects/${slugOf(next)}`, locale)} rel="next" class="next">
+      <span class="label">{t.case.next} →</span>
+      <span class="display">{next.data.title}</span>
+    </a>
+  </nav>
 </article>
 
 <style>
-  .case {
+  .case__head {
     display: grid;
-    gap: var(--s-5);
-    padding-block: var(--s-8);
-    max-width: 920px;
+    gap: var(--s-4);
+    padding-top: var(--s-8);
   }
-  .back {
+  .case__back {
+    width: max-content;
     color: var(--ink-muted);
     text-decoration: none;
   }
-  h1 {
-    font-size: var(--step-4);
-  }
-  .pitch {
-    font-size: var(--step-1);
-    line-height: 1.4;
-    max-width: 52ch;
-  }
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--s-4);
-    margin: 0;
-  }
-  .metrics div {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: var(--s-1);
-    padding: var(--s-4);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-m);
-  }
-  dt {
-    color: var(--ink-muted);
-  }
-  dd {
-    margin: 0;
-    font-size: var(--step-2);
+  .case__back:hover {
     color: var(--signal);
   }
-  figure {
-    margin: 0;
-    padding: var(--s-4);
-    background: #fbfaf6;
-    border-radius: var(--radius-m);
+  .case__title {
+    max-width: 18ch;
+    font-size: var(--step-5);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
   }
-  figure :global(img) {
-    width: 100%;
-    height: auto;
+  .case__pitch {
+    max-width: 56ch;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: var(--ink-muted);
   }
-  .prose {
-    max-width: var(--measure);
-  }
-  .prose :global(h2) {
-    font-family: var(--font-display);
-    font-size: var(--step-3);
-    margin: var(--s-7) 0 var(--s-4);
-  }
-  .prose :global(p),
-  .prose :global(ul),
-  .prose :global(pre),
-  .prose :global(table),
-  .prose :global(blockquote) {
-    margin: 0 0 var(--s-4);
-  }
-  .prose :global(li) {
-    margin-bottom: var(--s-2);
-  }
-  .prose :global(pre) {
-    padding: var(--s-4);
-    overflow-x: auto;
-    background: var(--bg-sunken) !important;
-    color: var(--ink);
-    border-radius: var(--radius-m);
-    font-size: 0.8rem;
-  }
-  .prose :global(code) {
-    font-family: var(--font-mono);
-    font-size: 0.88em;
-  }
-  .prose :global(table) {
-    display: block;
-    overflow-x: auto;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-  }
-  .prose :global(th),
-  .prose :global(td) {
-    padding: var(--s-2) var(--s-3);
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
-  }
-  .prose :global(blockquote) {
-    padding: var(--s-4);
-    border-left: 2px solid var(--signal);
-    background: var(--signal-soft);
-  }
-  .stack {
+  .case__actions {
     display: flex;
     flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-2);
+  }
+
+  .case__visual {
+    margin-top: var(--s-7);
+  }
+  .case__plate {
+    padding: clamp(0.75rem, 2vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    background-color: var(--bg-sunken);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .case__plate :global(img) {
+    width: 100%;
+    max-height: 640px;
+    height: auto;
+    object-fit: contain;
+    background: #fcfcfa;
+    border-radius: var(--radius-m);
+  }
+  .case__glyph {
+    aspect-ratio: 21 / 9;
+  }
+
+  .case__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--s-5);
+    margin-block: var(--s-7) 0;
+  }
+  .case__metrics div {
+    display: flex;
+    flex-direction: column-reverse;
     gap: var(--s-2);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--line-strong);
+  }
+  .case__metrics dt {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+  }
+  .case__metrics dd {
+    margin: 0;
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--signal);
+  }
+
+  .case__body {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--s-8);
+    margin-top: var(--s-8);
+  }
+  .case__aside {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    display: grid;
+    gap: var(--s-6);
+  }
+  .case__aside ol {
+    display: grid;
+    gap: var(--s-2);
+    margin: var(--s-3) 0 0;
     padding: 0;
     list-style: none;
   }
-  .stack li {
-    padding: 0.2rem 0.6rem;
+  .case__aside ol a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+  .case__aside ol a:hover {
+    color: var(--ink);
+  }
+  .case__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1);
+    margin: var(--s-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case__pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+    margin-top: var(--s-9);
+  }
+  .case__pager a {
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-5);
     border: 1px solid var(--line);
-    border-radius: var(--radius-s);
-    font-size: 0.75rem;
+    border-radius: var(--radius-l);
+    text-decoration: none;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+  .case__pager a:hover {
+    border-color: var(--signal);
+  }
+  .case__pager .display {
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+  .case__pager .next {
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .case__body {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+    }
+    .case__aside {
+      position: static;
+    }
+    .case__aside nav {
+      display: none;
+    }
+    .case__pager {
+      grid-template-columns: 1fr;
+    }
+    .case__pager .next {
+      text-align: left;
+    }
   }
 </style>

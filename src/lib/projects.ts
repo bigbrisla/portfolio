@@ -21,3 +21,11 @@ export async function projectPaths(locale: Locale) {
   const list = (await getProjects(locale)).filter((p) => p.data.tier !== 'upcoming');
   return list.map((project) => ({ params: { slug: slugOf(project) }, props: { project } }));
 }
+
+/** Home-page copy for one language (src/content/site/<locale>.yaml). */
+export async function getSiteCopy(locale: Locale) {
+  const { getEntry } = await import('astro:content');
+  const entry = await getEntry('site', locale);
+  if (!entry) throw new Error(`Missing src/content/site/${locale}.yaml`);
+  return entry.data;
+}

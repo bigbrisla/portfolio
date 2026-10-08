@@ -1,0 +1,94 @@
+---
+import ThesisMatcher from './ThesisMatcher.vue';
+import { localizedPath, useTranslations, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  copy: {
+    kicker: string;
+    title: string;
+    paragraphs: string[];
+    demoTitle: string;
+    demoNote: string;
+    link: string;
+  };
+}
+const { locale, copy } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="thesis">
+  <div class="thesis__text">
+    <p class="label" data-reveal>
+      {copy.kicker}
+    </p>
+    <h3 class="thesis__title display" data-reveal>
+      {copy.title}
+    </h3>
+    {copy.paragraphs.map((p, i) => (
+      <p data-reveal style={`--reveal-i: ${i}`}>
+        {p}
+      </p>
+    ))}
+    <p data-reveal>
+      <a class="btn" href={localizedPath('/projects/omop-schema-matching', locale)}>
+        {copy.link} →
+      </a>
+    </p>
+  </div>
+
+  <aside class="thesis__demo" aria-labelledby="thesis-demo-title" data-reveal>
+    <p id="thesis-demo-title" class="label">
+      {copy.demoTitle}
+    </p>
+    <ThesisMatcher client:visible labels={t.thesisDemo} />
+    <p class="thesis__note">{copy.demoNote}</p>
+  </aside>
+</div>
+
+<style>
+  .thesis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    align-items: start;
+  }
+  .thesis__text {
+    display: grid;
+    gap: var(--s-4);
+    max-width: 60ch;
+  }
+  .thesis__title {
+    font-size: var(--step-3);
+    margin-bottom: var(--s-2);
+  }
+  .thesis__demo {
+    position: sticky;
+    top: 6rem;
+    display: grid;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background-color: var(--bg-raised);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    /* reserve space so the island doesn't shift layout when it hydrates */
+    min-height: 420px;
+  }
+  .thesis__note {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+  @media (max-width: 1000px) {
+    .thesis {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+    }
+    .thesis__demo {
+      position: static;
+    }
+  }
+</style>

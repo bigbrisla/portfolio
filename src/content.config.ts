@@ -38,4 +38,49 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { projects };
+const text = z.coerce.string(); // YAML turns bare years into numbers
+const site = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/content/site' }),
+  schema: z.object({
+    hero: z.object({ role: text, line: text, ctaWork: text, ctaContact: text, location: text }),
+    trajectory: z.object({
+      intro: text,
+      steps: z.array(z.object({ when: text, title: text, place: text, text })),
+    }),
+    work: z.object({
+      intro: text,
+      featured: text,
+      upcoming: text,
+      readCase: text,
+      repo: text,
+      demoSoon: text,
+    }),
+    thesis: z.object({
+      kicker: text,
+      title: text,
+      paragraphs: z.array(text),
+      demoTitle: text,
+      demoNote: text,
+      link: text,
+    }),
+    method: z.object({
+      intro: text,
+      steps: z.array(z.object({ title: text, text })),
+      ai: z.object({ title: text, paragraphs: z.array(text), principles: z.array(text) }),
+    }),
+    toolkit: z.object({
+      intro: text,
+      groups: z.array(z.object({ name: text, items: z.array(text) })),
+    }),
+    contact: z.object({
+      title: text,
+      text,
+      emailLabel: text,
+      copy: text,
+      copied: text,
+      cv: text,
+    }),
+  }),
+});
+
+export const collections = { projects, site };

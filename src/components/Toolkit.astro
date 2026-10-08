@@ -1,0 +1,68 @@
+---
+interface Props {
+  copy: { intro: string; groups: { name: string; items: string[] }[] };
+}
+const { copy } = Astro.props;
+---
+
+<p class="section-intro" data-reveal>
+  {copy.intro}
+</p>
+<dl class="toolkit">
+  {copy.groups.map((g, i) => (
+    <div class="group" data-reveal style={`--reveal-i: ${i % 3}`}>
+      <dt class="label">{g.name}</dt>
+      <dd>
+        <ul>
+          {g.items.map((it) => (
+            <li>{it}</li>
+          ))}
+        </ul>
+      </dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .toolkit {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-5);
+    margin: 0;
+  }
+  .group {
+    display: grid;
+    gap: var(--s-3);
+    align-content: start;
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  dd {
+    margin: 0;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    background: var(--bg-raised);
+  }
+  @media (max-width: 900px) {
+    .toolkit {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .toolkit {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

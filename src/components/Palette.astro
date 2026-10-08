@@ -1,0 +1,87 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import CommandPalette from './CommandPalette.vue';
+import { getLocale, useTranslations, localizedPath, alternatePath } from '@/i18n/utils';
+import { getProjects, slugOf } from '@/lib/projects';
+import { LINKS } from '@/lib/site';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const other = locale === 'en' ? 'it' : 'en';
+const home = localizedPath('/', locale);
+const anchor = (id: string) => `${home === '/' ? '' : home}/#${id}`;
+const hasCv = fs.existsSync(path.join(process.cwd(), 'public', LINKS.cv));
+
+const sectionIds = ['trajectory', 'work', 'thesis', 'method', 'toolkit', 'contact'] as const;
+const projects = (await getProjects(locale)).filter((p) => p.data.tier !== 'upcoming');
+
+const items = [
+  ...sectionIds.map((id) => ({
+    id: `s-${id}`,
+    group: 'sections' as const,
+    title: t.nav[id],
+    hint: t.sections[id].index,
+    href: anchor(id),
+  })),
+  ...projects.map((p) => ({
+    id: `p-${slugOf(p)}`,
+    group: 'projects' as const,
+    title: p.data.title,
+    hint: p.data.kind.split('·')[0].trim(),
+    keywords: `${p.data.kind} ${p.data.stack.join(' ')}`,
+    href: localizedPath(`/projects/${slugOf(p)}`, locale),
+  })),
+  {
+    id: 'a-theme',
+    group: 'actions' as const,
+    title: t.palette.theme,
+    action: 'theme' as const,
+    keywords: 'dark light tema',
+  },
+  {
+    id: 'a-lang',
+    group: 'actions' as const,
+    title: t.palette.lang,
+    href: alternatePath(Astro.url, other),
+    keywords: 'language lingua english italiano',
+  },
+  {
+    id: 'a-email',
+    group: 'actions' as const,
+    title: t.palette.copyEmail,
+    hint: LINKS.email,
+    action: 'copyEmail' as const,
+    keywords: 'email mail contact contatti',
+  },
+  {
+    id: 'a-github',
+    group: 'actions' as const,
+    title: t.palette.github,
+    href: LINKS.github,
+    action: 'external' as const,
+    keywords: 'code repository',
+  },
+  {
+    id: 'a-linkedin',
+    group: 'actions' as const,
+    title: t.palette.linkedin,
+    href: LINKS.linkedin,
+    action: 'external' as const,
+    keywords: 'profile profilo',
+  },
+  ...(hasCv
+    ? [
+        {
+          id: 'a-cv',
+          group: 'actions' as const,
+          title: t.palette.cv,
+          href: `/${LINKS.cv}`,
+          keywords: 'resume curriculum pdf',
+        },
+      ]
+    : []),
+];
+---
+
+<CommandPalette client:idle items={items} email={LINKS.email} labels={t.palette} />

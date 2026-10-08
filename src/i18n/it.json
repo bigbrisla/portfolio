@@ -15,23 +15,80 @@
     "search": "Cerca",
     "menu": "Menu"
   },
-  "theme": { "toggle": "Cambia tema", "light": "Chiaro", "dark": "Scuro" },
-  "lang": { "switch": "Read in English", "short": "EN", "label": "Lingua" },
-  "hero": {
-    "role": "AI Engineer · Data & ML",
-    "line": "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione.",
-    "ctaWork": "Guarda i lavori",
-    "ctaContact": "Scrivimi",
-    "location": "Reggio Emilia"
+  "theme": {
+    "toggle": "Cambia tema",
+    "light": "Chiaro",
+    "dark": "Scuro"
+  },
+  "lang": {
+    "switch": "Read in English",
+    "short": "EN",
+    "label": "Lingua"
   },
   "sections": {
-    "trajectory": { "index": "01", "title": "Traiettoria" },
-    "work": { "index": "02", "title": "Lavori" },
-    "thesis": { "index": "03", "title": "Tesi" },
-    "method": { "index": "04", "title": "Metodo" },
-    "toolkit": { "index": "05", "title": "Strumenti" },
-    "contact": { "index": "06", "title": "Contatti" }
+    "trajectory": {
+      "index": "01",
+      "title": "Traiettoria"
+    },
+    "work": {
+      "index": "02",
+      "title": "Lavori"
+    },
+    "thesis": {
+      "index": "03",
+      "title": "Tesi"
+    },
+    "method": {
+      "index": "04",
+      "title": "Metodo"
+    },
+    "toolkit": {
+      "index": "05",
+      "title": "Strumenti"
+    },
+    "contact": {
+      "index": "06",
+      "title": "Contatti"
+    }
   },
-  "placeholder": "Contenuto in arrivo nella milestone {n}.",
-  "footer": { "built": "Fatto con Astro. Nessun tracker.", "top": "Torna su" }
+  "footer": {
+    "built": "Fatto con Astro. Nessun tracker.",
+    "top": "Torna su"
+  },
+  "thesisDemo": {
+    "noise": "Rumore",
+    "exact": "Esatto",
+    "semantic": "Semantico",
+    "match": "trovata",
+    "noMatch": "persa",
+    "hospitalA": "Ospedale A",
+    "hospitalB": "Ospedale B",
+    "examples": "Errori introdotti",
+    "threshold": "soglia di match"
+  },
+  "palette": {
+    "open": "Cerca e comandi",
+    "placeholder": "Cerca nello spazio…",
+    "empty": "Nessun vicino trovato.",
+    "sections": "Sezioni",
+    "projects": "Progetti",
+    "actions": "Azioni",
+    "theme": "Cambia tema chiaro/scuro",
+    "lang": "Read in English",
+    "copyEmail": "Copia l'indirizzo email",
+    "copied": "Email copiata",
+    "github": "Apri GitHub",
+    "linkedin": "Apri LinkedIn",
+    "cv": "Scarica il CV",
+    "hint": "per navigare",
+    "close": "Chiudi"
+  },
+  "case": {
+    "back": "Tutti i lavori",
+    "details": "Dettagli del progetto",
+    "onThisPage": "In questa pagina",
+    "more": "Altri progetti",
+    "prev": "Precedente",
+    "next": "Successivo"
+  }
 }

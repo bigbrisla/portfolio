@@ -1,0 +1,46 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { getProjects } from '@/lib/projects';
+import type { Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  copy: {
+    intro: string;
+    featured: string;
+    upcoming: string;
+    readCase: string;
+    repo: string;
+    demoSoon: string;
+  };
+}
+const { locale, copy } = Astro.props;
+const projects = await getProjects(locale);
+---
+
+<p class="section-intro" data-reveal>
+  {copy.intro}
+</p>
+<div class="work-grid">
+  {projects.map((p, i) => (
+    <ProjectCard project={p} locale={locale} labels={copy} index={i} />
+  ))}
+</div>
+
+<style>
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+  @media (max-width: 1000px) {
+    .work-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

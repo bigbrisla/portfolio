@@ -41,6 +41,8 @@ Modello finale: HistGradientBoosting, valutato una sola volta sul test (19.867 r
 | AUC-ROC | 0,671 (IC 95% 0,659–0,683); la letteratura su questo dataset riporta 0,65–0,70 |
 | Brier   | 0,096                                                                          |
 
+![Curve precision-recall e ROC per regressione logistica, random forest e gradient boosting sul test. I tre modelli quasi si sovrappongono; la curva PR resta poco sopra la linea di prevalenza 0,114 ad alta recall.](../../../assets/projects/diabetes-readmission/model_01_curves.png)
+
 Seguendo il 10% dei pazienti a rischio più alto si intercetta il **24,3% delle riammissioni**, contro il 10% atteso scegliendo a caso. Quattro riammissioni su cinque però restano fuori. Le famiglie di modelli si equivalgono quasi: in cross-validation circa 10 millesimi di AUC-PR separano la regressione logistica dal boosting.
 
 **L'ipotesi è stata rifiutata.** Leakage di paziente (al netto del volume di dati): −0,5% [−1,6; +0,6]. Preprocessing fittato prima dello split: +0,0% [−1,4; +1,4]. Valutare includendo i pazienti con esito impossibile: **−8,2%** [−10,1; −6,3]. È l'unico effetto risolto, e va nella direzione opposta a quella che mi aspettavo. Nessuno si avvicina al +4,7% che si ottiene passando dalla logistica al boosting.

@@ -1,0 +1,118 @@
+---
+interface Props {
+  copy: {
+    intro: string;
+    steps: { title: string; text: string }[];
+    ai: { title: string; paragraphs: string[]; principles: string[] };
+  };
+}
+const { copy } = Astro.props;
+---
+
+<p class="section-intro" data-reveal>
+  {copy.intro}
+</p>
+
+<ol class="steps">
+  {copy.steps.map((s, i) => (
+    <li class="step" data-reveal style={`--reveal-i: ${i % 3}`}>
+      <span class="step__n mono" aria-hidden="true">
+        {String(i + 1).padStart(2, '0')}
+      </span>
+      <h3 class="step__title">{s.title}</h3>
+      <p class="step__text">{s.text}</p>
+    </li>
+  ))}
+</ol>
+
+<div class="ai" data-reveal>
+  <div class="ai__text">
+    <h3 class="ai__title display">{copy.ai.title}</h3>
+    {copy.ai.paragraphs.map((p) => (
+      <p>{p}</p>
+    ))}
+  </div>
+  <ul class="ai__principles">
+    {copy.ai.principles.map((p) => (
+      <li>
+        <span class="mono" aria-hidden="true">
+          &gt;
+        </span>{' '}
+        {p}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .step {
+    display: grid;
+    gap: var(--s-3);
+    align-content: start;
+    padding: var(--s-5) var(--s-5) var(--s-6) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .step__n {
+    color: var(--signal);
+  }
+  .step__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+  .step__text {
+    color: var(--ink-muted);
+    font-size: 0.98rem;
+  }
+
+  .ai {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--s-7);
+    margin-top: var(--s-8);
+    padding: var(--s-6);
+    border-radius: var(--radius-l);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .ai__text {
+    display: grid;
+    gap: var(--s-4);
+    max-width: 62ch;
+  }
+  .ai__title {
+    font-size: var(--step-3);
+  }
+  .ai__principles {
+    display: grid;
+    gap: var(--s-4);
+    align-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.15;
+  }
+  .ai__principles .mono {
+    font-size: 0.9rem;
+    color: var(--signal);
+    filter: brightness(1.25);
+  }
+  @media (max-width: 900px) {
+    .ai {
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+      padding: var(--s-5);
+    }
+  }
+</style>

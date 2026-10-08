@@ -1,0 +1,322 @@
+---
+import { Image } from 'astro:assets';
+import Glyph from './Glyph.astro';
+import { slugOf, type Project } from '@/lib/projects';
+import { localizedPath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+  labels: { featured: string; upcoming: string; readCase: string; repo: string; demoSoon: string };
+  index: number;
+}
+const { project, locale, labels, index } = Astro.props;
+const d = project.data;
+const slug = slugOf(project);
+const href = d.tier === 'upcoming' ? undefined : localizedPath(`/projects/${slug}`, locale);
+const titleId = `card-${slug}`;
+const metrics = d.tier === 'featured' ? d.metrics : d.metrics.slice(0, 2);
+// stable pseudo-coordinates, purely decorative
+const coord = (n: number) => ((((n * 9301 + 49297) % 233280) / 233280) * 2 - 1).toFixed(2);
+---
+
+<article
+  class={`card card--${d.tier}`}
+  aria-labelledby={titleId}
+  data-reveal
+  style={`--reveal-i: ${index % 3}`}
+>
+  <div class="card__visual" aria-hidden={d.cover ? undefined : 'true'}>
+    {d.cover ? (
+      <Image
+        src={d.cover}
+        alt={d.coverAlt ?? ''}
+        widths={[480, 720, 960]}
+        sizes={
+          d.tier === 'featured'
+            ? '(min-width: 1000px) 640px, 100vw'
+            : '(min-width: 1000px) 400px, (min-width: 640px) 50vw, 100vw'
+        }
+        loading="lazy"
+        class="card__img"
+      />
+    ) : (
+      <Glyph seed={slug} score={d.metrics[0]?.value} dense={d.tier === 'featured'} />
+    )}
+    <span class="card__coord mono" aria-hidden="true">
+      [{coord(d.order * 7 + 3)}, {coord(d.order * 13 + 5)}]
+    </span>
+  </div>
+
+  <div class="card__body">
+    <p class="card__meta label">
+      {d.tier === 'featured' && <span class="pill">{labels.featured}</span>}
+      {d.tier === 'upcoming' && (
+        <span class="pill pill--live">
+          <span class="pulse" aria-hidden="true" />
+          {labels.upcoming}
+        </span>
+      )}
+      <span>{d.kind}</span>
+    </p>
+    <h3 id={titleId} class="card__title">
+      {href ? (
+        <a href={href} class="card__link">
+          {d.title}
+        </a>
+      ) : (
+        d.title
+      )}
+    </h3>
+    <p class="card__pitch">{d.pitch}</p>
+
+    {metrics.length > 0 && (
+      <dl class="card__metrics">
+        {metrics.map((m) => (
+          <div>
+            <dt>{m.label}</dt>
+            <dd class="mono">{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+
+    {d.tier !== 'compact' && d.stack.length > 0 && (
+      <ul class="card__stack" aria-label="Stack">
+        {d.stack.slice(0, d.tier === 'featured' ? 7 : 4).map((s) => (
+          <li class="tag">{s}</li>
+        ))}
+      </ul>
+    )}
+
+    <p class="card__foot mono">
+      {href && <span aria-hidden="true">{labels.readCase} →</span>}
+      {d.tier === 'upcoming' &&
+        (d.demo ? <a href={d.demo}>Demo ↗</a> : <span>{labels.demoSoon}</span>)}
+    </p>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    transition:
+      border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .card:has(.card__link):hover,
+  .card:focus-within {
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card:has(.card__link):hover {
+      transform: translateY(-3px);
+    }
+  }
+  /* whole card clickable, one real link (accessible name = title) */
+  .card__link {
+    text-decoration: none;
+  }
+  .card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .card__link:focus-visible {
+    outline: none;
+  }
+  .card:has(.card__link:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .card__visual {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: var(--bg-sunken);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  /* repo figures are drawn on white: present them as a printed plate */
+  .card__visual :global(.card__img) {
+    position: absolute;
+    inset: var(--s-4);
+    width: calc(100% - 2 * var(--s-4));
+    height: calc(100% - 2 * var(--s-4));
+    object-fit: contain;
+    background: #fcfcfa;
+    border-radius: var(--radius-s);
+    padding: var(--s-2);
+    transition: transform var(--dur-slow) var(--ease);
+  }
+  .card:hover .card__visual :global(.card__img) {
+    transform: scale(1.015);
+  }
+  .card__coord {
+    position: absolute;
+    right: var(--s-3);
+    bottom: var(--s-2);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+  }
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding: var(--s-5);
+  }
+  .card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: var(--signal-soft);
+    color: var(--signal);
+  }
+  .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pulse {
+      animation: pulse 1.8s var(--ease) infinite;
+    }
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.25;
+    }
+  }
+  .card__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.08;
+  }
+  .card__pitch {
+    color: var(--ink-muted);
+    font-size: 0.98rem;
+  }
+  .card__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--s-3);
+    margin: var(--s-2) 0 0;
+  }
+  .card__metrics div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+    padding-top: var(--s-2);
+    border-top: 1px solid var(--line);
+  }
+  .card__metrics dd {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--signal);
+    font-weight: 500;
+  }
+  .card__metrics dt {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--ink-muted);
+  }
+  .card__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1);
+    margin: var(--s-1) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .card__foot {
+    margin-top: auto;
+    padding-top: var(--s-2);
+    font-size: 0.8rem;
+    color: var(--ink);
+  }
+  .card__foot a {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* — tiers — */
+  .card--featured {
+    grid-column: 1 / -1;
+    grid-template-rows: none;
+    grid-template-columns: 1.15fr 1fr;
+  }
+  .card--featured .card__visual {
+    aspect-ratio: auto;
+    min-height: 360px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .card--featured .card__body {
+    padding: var(--s-6);
+    gap: var(--s-4);
+  }
+  .card--featured .card__title {
+    font-size: var(--step-3);
+  }
+  .card--featured .card__pitch {
+    font-size: var(--step-0);
+  }
+  .card--featured .card__metrics dd {
+    font-size: 1.6rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  .card--compact .card__visual {
+    aspect-ratio: 21 / 9;
+  }
+  .card--upcoming {
+    background: transparent;
+    border-style: dashed;
+    border-color: var(--line-strong);
+  }
+  .card--upcoming .card__visual {
+    aspect-ratio: 21 / 9;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1000px) {
+    .card--featured {
+      grid-template-columns: 1fr;
+    }
+    .card--featured .card__visual {
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+  @media (max-width: 520px) {
+    .card--featured .card__body {
+      padding: var(--s-5);
+    }
+  }
+</style>

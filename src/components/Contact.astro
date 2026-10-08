@@ -1,0 +1,122 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { LINKS } from '@/lib/site';
+
+interface Props {
+  copy: {
+    title: string;
+    text: string;
+    emailLabel: string;
+    copy: string;
+    copied: string;
+    cv: string;
+  };
+}
+const { copy } = Astro.props;
+// The CV link only appears once the PDF exists (see CONTENT_TODO.md).
+const hasCv = fs.existsSync(path.join(process.cwd(), 'public', LINKS.cv));
+---
+
+<div class="contact">
+  <h3 class="contact__title display" data-reveal>
+    {copy.title}
+  </h3>
+  <p class="contact__text" data-reveal>
+    {copy.text}
+  </p>
+
+  <div class="contact__email" data-reveal>
+    <span class="label">{copy.emailLabel}</span>
+    <a class="contact__addr" href={`mailto:${LINKS.email}`}>
+      {LINKS.email}
+    </a>
+    <button
+      class="btn contact__copy"
+      type="button"
+      data-copy={LINKS.email}
+      data-copied={copy.copied}
+      aria-live="polite"
+    >
+      {copy.copy}
+    </button>
+  </div>
+
+  <ul class="contact__links" data-reveal>
+    <li>
+      <a class="btn" href={LINKS.linkedin} rel="noopener">
+        LinkedIn ↗
+      </a>
+    </li>
+    <li>
+      <a class="btn" href={LINKS.github} rel="noopener">
+        GitHub ↗
+      </a>
+    </li>
+    {hasCv && (
+      <li>
+        <a class="btn btn--primary" href={`/${LINKS.cv}`} download>
+          {copy.cv}
+        </a>
+      </li>
+    )}
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    const label = btn.textContent?.trim() ?? '';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? '');
+        btn.textContent = btn.dataset.copied ?? label;
+        setTimeout(() => (btn.textContent = label), 1800);
+      } catch {
+        window.location.href = `mailto:${btn.dataset.copy}`;
+      }
+    });
+  });
+</script>
+
+<style>
+  .contact {
+    display: grid;
+    gap: var(--s-5);
+    padding: var(--s-8) 0 var(--s-6);
+  }
+  .contact__title {
+    font-size: var(--step-4);
+    max-width: 18ch;
+  }
+  .contact__text {
+    max-width: 52ch;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+  .contact__email {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3) var(--s-4);
+    margin-top: var(--s-4);
+  }
+  .contact__email .label {
+    width: 100%;
+  }
+  .contact__addr {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.1;
+    text-decoration-color: var(--signal);
+    overflow-wrap: anywhere;
+  }
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin: var(--s-2) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

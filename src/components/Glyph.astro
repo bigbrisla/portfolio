@@ -1,0 +1,120 @@
+---
+/**
+ * Generated preview for projects without a reliable image: a small latent
+ * space seeded by the project slug — a few clusters, one highlighted, linked
+ * by similarity arcs. Same slug, same picture, every build.
+ */
+import { seeded, gaussian } from '@/lib/rand';
+
+interface Props {
+  seed: string;
+  /** label printed on the highlighted arc (e.g. a real metric); optional */
+  score?: string;
+  dense?: boolean;
+}
+const { seed, score, dense = false } = Astro.props;
+const rand = seeded(seed);
+const W = 600;
+const H = 360;
+const n = 3 + Math.floor(rand() * 2);
+const clusters = Array.from({ length: n }, (_, i) => ({
+  x: 90 + ((i + 0.5) / n) * (W - 180) + (rand() - 0.5) * 60,
+  y: 80 + rand() * (H - 160),
+  s: 22 + rand() * 30,
+  hot: i === Math.floor(n / 2),
+}));
+const per = dense ? 70 : 46;
+const points = clusters.flatMap((c) =>
+  Array.from({ length: per }, () => ({
+    x: c.x + gaussian(rand) * c.s,
+    y: c.y + gaussian(rand) * c.s * 0.85,
+    r: 0.9 + rand() * 1.9,
+    hot: c.hot,
+  })),
+);
+const dust = Array.from({ length: 70 }, () => ({ x: rand() * W, y: rand() * H, r: 0.6 + rand() }));
+const hot = clusters.find((c) => c.hot)!;
+const arcs = clusters
+  .filter((c) => !c.hot)
+  .map((c, i) => {
+    const mx = (c.x + hot.x) / 2;
+    const my = Math.min(c.y, hot.y) - 40 - rand() * 30;
+    return {
+      d: `M${hot.x.toFixed(1)} ${hot.y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${c.x.toFixed(1)} ${c.y.toFixed(1)}`,
+      lx: mx,
+      ly: my + 12,
+      label: i === 0 && score ? score : (0.4 + rand() * 0.5).toFixed(2),
+      main: i === 0,
+    };
+  });
+---
+
+<svg
+  class="glyph"
+  viewBox={`0 0 ${W} ${H}`}
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <g class="dust">
+    {dust.map((p) => (
+      <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r={p.r.toFixed(2)} />
+    ))}
+  </g>
+  <g class="arcs">
+    {arcs.map((a) => (
+      <g class={a.main ? 'main' : undefined}>
+        <path d={a.d} />
+        <text x={a.lx.toFixed(1)} y={a.ly.toFixed(1)}>
+          {a.label}
+        </text>
+      </g>
+    ))}
+  </g>
+  <g class="pts">
+    {points.map((p) => (
+      <circle
+        cx={p.x.toFixed(1)}
+        cy={p.y.toFixed(1)}
+        r={p.r.toFixed(2)}
+        class={p.hot ? 'hot' : undefined}
+      />
+    ))}
+  </g>
+</svg>
+
+<style>
+  .glyph {
+    width: 100%;
+    height: 100%;
+  }
+  .dust circle {
+    fill: var(--point);
+    opacity: 0.3;
+  }
+  .pts circle {
+    fill: var(--point);
+    opacity: 0.8;
+  }
+  .pts circle.hot {
+    fill: var(--signal);
+    opacity: 0.95;
+  }
+  .arcs path {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+  }
+  .arcs .main path {
+    stroke: var(--signal);
+  }
+  .arcs text {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    fill: var(--ink-muted);
+    text-anchor: middle;
+  }
+  .arcs .main text {
+    fill: var(--signal);
+  }
+</style>

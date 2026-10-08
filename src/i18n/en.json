@@ -15,23 +15,80 @@
     "search": "Search",
     "menu": "Menu"
   },
-  "theme": { "toggle": "Toggle theme", "light": "Light", "dark": "Dark" },
-  "lang": { "switch": "Leggi in italiano", "short": "IT", "label": "Language" },
-  "hero": {
-    "role": "AI Engineer · Data & ML",
-    "line": "I build systems that find what's similar — and measure whether they're right.",
-    "ctaWork": "See the work",
-    "ctaContact": "Get in touch",
-    "location": "Reggio Emilia, IT"
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "lang": {
+    "switch": "Leggi in italiano",
+    "short": "IT",
+    "label": "Language"
   },
   "sections": {
-    "trajectory": { "index": "01", "title": "Trajectory" },
-    "work": { "index": "02", "title": "Work" },
-    "thesis": { "index": "03", "title": "Thesis" },
-    "method": { "index": "04", "title": "Method" },
-    "toolkit": { "index": "05", "title": "Toolkit" },
-    "contact": { "index": "06", "title": "Contact" }
+    "trajectory": {
+      "index": "01",
+      "title": "Trajectory"
+    },
+    "work": {
+      "index": "02",
+      "title": "Work"
+    },
+    "thesis": {
+      "index": "03",
+      "title": "Thesis"
+    },
+    "method": {
+      "index": "04",
+      "title": "Method"
+    },
+    "toolkit": {
+      "index": "05",
+      "title": "Toolkit"
+    },
+    "contact": {
+      "index": "06",
+      "title": "Contact"
+    }
   },
-  "placeholder": "Content arrives in milestone {n}.",
-  "footer": { "built": "Built with Astro. No trackers.", "top": "Back to top" }
+  "footer": {
+    "built": "Built with Astro. No trackers.",
+    "top": "Back to top"
+  },
+  "thesisDemo": {
+    "noise": "Noise",
+    "exact": "Exact",
+    "semantic": "Semantic",
+    "match": "match",
+    "noMatch": "no match",
+    "hospitalA": "Hospital A",
+    "hospitalB": "Hospital B",
+    "examples": "Injected errors",
+    "threshold": "match threshold"
+  },
+  "palette": {
+    "open": "Search and commands",
+    "placeholder": "Search the space…",
+    "empty": "No neighbours found.",
+    "sections": "Sections",
+    "projects": "Projects",
+    "actions": "Actions",
+    "theme": "Toggle light/dark theme",
+    "lang": "Leggi in italiano",
+    "copyEmail": "Copy email address",
+    "copied": "Email copied",
+    "github": "Open GitHub",
+    "linkedin": "Open LinkedIn",
+    "cv": "Download CV",
+    "hint": "to navigate",
+    "close": "Close"
+  },
+  "case": {
+    "back": "All work",
+    "details": "Project details",
+    "onThisPage": "On this page",
+    "more": "More projects",
+    "prev": "Previous",
+    "next": "Next"
+  }
 }

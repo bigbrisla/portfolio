@@ -33,6 +33,17 @@ const sections = ['work', 'thesis', 'method', 'contact'] as const;
     </nav>
 
     <div class="nav__actions">
+      <button class="nav__search" type="button" data-palette-open aria-label={t.palette.open}>
+        <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.5"></circle>
+          <path d="m13 13 4 4"></path>
+        </svg>
+        <span class="nav__search-label">{t.nav.search}</span>
+        <kbd class="mono" aria-hidden="true">
+          ⌘K
+        </kbd>
+        <span class="nav__menu-label">{t.nav.menu}</span>
+      </button>
       <a
         class="nav__lang mono"
         href={alternatePath(Astro.url, other)}
@@ -105,6 +116,40 @@ const sections = ['work', 'thesis', 'method', 'contact'] as const;
     align-items: center;
     gap: var(--s-2);
   }
+  .nav__search {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    height: 2.5rem;
+    padding: 0 var(--s-3) 0 var(--s-4);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: none;
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+  .nav__search:hover {
+    border-color: var(--signal);
+    color: var(--ink);
+  }
+  .nav__search svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+  .nav__search kbd {
+    padding: 0 0.35rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+  .nav__menu-label {
+    display: none;
+  }
   .nav__lang {
     display: inline-grid;
     place-items: center;
@@ -120,9 +165,18 @@ const sections = ['work', 'thesis', 'method', 'contact'] as const;
     border-color: var(--signal);
   }
 
+  @media (max-width: 980px) {
+    .nav__search-label,
+    .nav__search kbd {
+      display: none;
+    }
+  }
   @media (max-width: 720px) {
     nav {
       display: none;
+    }
+    .nav__menu-label {
+      display: inline;
     }
     .nav__actions {
       margin-left: auto;

@@ -1,0 +1,148 @@
+# Testi della home (italiano). Modificabili liberamente: i componenti leggono da qui.
+hero:
+  role: AI Engineer · Data & ML
+  line: Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione.
+  ctaWork: Guarda i lavori
+  ctaContact: Scrivimi
+  location: Reggio Emilia
+
+trajectory:
+  intro: >-
+    Ingegnere informatico di formazione, AI applicata di mestiere. Il filo conduttore sono dati da
+    abbinare, recuperare o prevedere, e la domanda su come si fa a sapere che la risposta è giusta.
+  steps:
+    - when: Mar 2025
+      title: AI Engineer Intern
+      place: OT Consulting · Reggio Emilia
+      text: >-
+        Il primo lavoro di AI engineering in azienda, fuori dall'aula.
+    - when: Giu 2025 →
+      title: Software Developer & AI Engineer
+      place: OT Consulting · Reggio Emilia
+      text: >-
+        Python e Vue.js tutti i giorni, più le attività di machine learning.
+    - when: 2026
+      title: Tesi sullo schema matching
+      place: Relatore Prof. Beneventano
+      text: >-
+        Far dialogare database clinici quando i loro codici sono quasi, ma non del tutto, uguali.
+        Ne parlo nella sezione Tesi.
+    - when: Dic 2026
+      title: Laurea Magistrale in Ingegneria Informatica
+      place: Università di Modena e Reggio Emilia
+      text: >-
+        Laurea prevista, con una tesi sulla data integration.
+
+work:
+  intro: >-
+    Sei progetti, ognuno con la sua valutazione e i suoi limiti messi per iscritto. I numeri vengono
+    dai repository, non dalla memoria.
+  featured: In evidenza
+  upcoming: In arrivo
+  readCase: Leggi il caso
+  repo: Repository
+  demoSoon: Link alla demo in arrivo
+
+thesis:
+  kicker: Schema matching e data integration
+  title: Due ospedali, un paziente, codici leggermente diversi.
+  paragraphs:
+    - >-
+      Gli ospedali registrano le stesse informazioni in database diversi, con nomi di colonna diversi.
+      Per unirli bisogna prima capire quale colonna dell'uno corrisponde a quale dell'altro: è lo
+      schema matching. Un modo comune per farlo è guardare i valori: se due colonne contengono le
+      stesse cose, probabilmente significano la stessa cosa.
+    - >-
+      Con i dati clinici è più difficile. Le diagnosi sono codici presi da enormi vocabolari medici, e
+      gli errori di codifica reali raramente sono casuali. Qualcuno registra "insufficienza renale
+      cronica, stadio 5" quando era stadio 4: un concetto vicino, non un refuso. Per un confronto
+      esatto quei due codici sono diversi quanto "malattia renale" e "frattura del braccio".
+    - >-
+      La mia tesi tratta il vocabolario per quello che è, una gerarchia: due codici sono simili se
+      sono vicini nell'albero. Ho costruito un modo per generare errori realistici "di prossimità" su
+      dati OMOP-CDM e un matcher che confronta i valori per significato e non per grafia, e ho misurato
+      entrambi contro il confronto esatto sul framework di benchmark Valentine.
+  demoTitle: Provalo
+  demoNote: >-
+    Esempio giocattolo per mostrare l'idea, non risultati della tesi. Alza il rumore: il confronto
+    esatto perde le colonne delle diagnosi, quello semantico le tiene.
+  link: Il codice dietro
+
+method:
+  intro: >-
+    Come affronto un problema di dati o di ML. Non sono regole lette da qualche parte: ognuna viene da
+    un errore che ho fatto o scovato nei miei progetti.
+  steps:
+    - title: Decidere prima cosa significa "giusto"
+      text: >-
+        Scelgo la metrica in base alla decisione che deve supportare, prima di toccare un modello. Con
+        l'11% di positivi l'accuracy premia il non fare nulla: nel progetto sulle riammissioni la metrica
+        è l'AUC-PR e la soglia viene dal costo atteso.
+    - title: Cercare gli errori silenziosi nei dati
+      text: >-
+        I bug costosi non fanno crashare niente. Un "None" che vuol dire "esame non richiesto", pazienti
+        che non possono essere riammessi, un parser che restituisce in silenzio 114 unità invece di 586.
+        Li cerco prima di addestrare qualsiasi cosa.
+    - title: Costruire la baseline debole
+      text: >-
+        Una baseline semplice dice quanto vale la parte furba. Nel progetto RAG ha mostrato che retrieval
+        e accuratezza finale non vanno di pari passo, cosa che altrimenti mi sarebbe sfuggita.
+    - title: Misurare l'affermazione, non l'impressione
+      text: >-
+        Confronti appaiati, intervalli di confidenza, soglie calibrate su dati separati. Se un disegno non
+        può rispondere alla domanda, si cambia il disegno. È così che "il protocollo conta" è diventata
+        un'ipotesi rifiutata.
+    - title: Scrivere i limiti accanto ai risultati
+      text: >-
+        Ogni progetto finisce con ciò che non sa fare. Chi legge un MOTA negativo merita la spiegazione
+        nello stesso punto del numero.
+  ai:
+    title: Come uso l'AI nel lavoro
+    paragraphs:
+      - >-
+        Uso Claude Code ogni giorno come compagno di programmazione: per leggere codice che non conosco,
+        impostare le parti noiose, scrivere test e mettere alla prova il mio ragionamento. Le decisioni
+        restano mie: cosa costruire, cosa misurare, quando qualcosa non torna.
+      - >-
+        In pratica vuol dire modifiche piccole e rilette invece di grandi blocchi generati, chiedere
+        esplicitamente i casi in cui le cose si rompono e verificare i numeri sulla fonte invece di fidarmi
+        di un riassunto. Anche questo sito è nato così, con ogni cifra controllata sui repository.
+    principles:
+      - L'AI accelera la scrittura, non il giudizio.
+      - Se non so spiegare una riga, non va in produzione.
+      - Le funzioni basate su LLM si valutano come qualsiasi altro modello.
+
+toolkit:
+  intro: Solo ciò che compare nei miei progetti.
+  groups:
+    - name: Linguaggi
+      items: [Python, JavaScript, SQL]
+    - name: ML e dati
+      items:
+        [scikit-learn, pandas, NumPy, XGBoost, SHAP, PyTorch, Ultralytics YOLO, OpenCV, ByteTrack]
+    - name: Retrieval e LLM
+      items:
+        [
+          Sentence Transformers,
+          ChromaDB,
+          BM25,
+          Reranking con cross-encoder,
+          Claude API,
+          Valutazione di RAG,
+        ]
+    - name: Backend
+      items: [FastAPI, Pydantic, API REST, Bot Telegram]
+    - name: Frontend
+      items: [Vue.js, Streamlit, HTML e CSS, Astro]
+    - name: Strumenti
+      items: [Git, pytest, Jupyter, BigQuery, Make, LaTeX, Claude Code]
+
+contact:
+  title: Parliamo di dati che devono avere senso.
+  text: >-
+    Disponibile per parlare di ruoli in AI engineering e data/ML, collaborazioni di ricerca o un progetto
+    su cui ti serve un secondo parere.
+  emailLabel: Email
+  copy: Copia
+  copied: Copiato
+  cv: Scarica il CV (PDF)
