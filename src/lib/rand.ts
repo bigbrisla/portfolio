@@ -19,3 +19,14 @@ export function gaussian(rand: () => number): number {
   const v = rand();
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
+
+/** Many dots as one SVG path (two arcs per dot): far less markup than <circle>s. */
+export function dotsPath(points: { x: number; y: number; r: number }[]): string {
+  const f = (n: number) => Math.round(n * 10) / 10;
+  return points
+    .map(({ x, y, r }) => {
+      const rr = f(r);
+      return `M${f(x - r)} ${f(y)}a${rr} ${rr} 0 1 0 ${f(2 * r)} 0a${rr} ${rr} 0 1 0 ${f(-2 * r)} 0`;
+    })
+    .join('');
+}

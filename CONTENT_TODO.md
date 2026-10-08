@@ -7,9 +7,18 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 
 ### Generali
 
-- [ ] Anni della laurea triennale (ateneo, inizio/fine) per la Traiettoria.
-- [ ] Cosa posso dire pubblicamente del lavoro in OT Consulting (tipo di progetti, uso quotidiano dell'AI).
+- [ ] Anni della laurea triennale (ateneo, inizio/fine): per ora la Traiettoria non la include. Se vuoi, si aggiunge un punto in `src/content/site/*.yaml`.
+- [ ] Cosa posso dire pubblicamente del lavoro in OT Consulting (tipo di progetti, uso quotidiano dell'AI). Oggi la Traiettoria dice solo "Python e Vue.js tutti i giorni, più le attività di machine learning".
 - [ ] Frase hero: "I build systems that find what's similar — and measure whether they're right." / "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione."
+
+### Testi scritti da me da confermare (sezioni della home)
+
+- [ ] **Metodo → "Come uso l'AI nel lavoro"**: i due paragrafi e i tre principi descrivono un uso quotidiano di Claude Code (pair programming, diff piccoli e riletti, verifica dei numeri sulla fonte). È una bozza plausibile ma riguarda le tue abitudini: correggila in `method.ai` di `src/content/site/*.yaml`.
+- [ ] **Metodo → i 5 passi**: ognuno cita un esempio reale dai tuoi repo (AUC-PR, `'None'`, 114/586 unità, baseline debole, MOTA). Controlla che il tono ti rappresenti.
+- [ ] **Contatti**: "Disponibile per parlare di ruoli in AI engineering e data/ML, collaborazioni di ricerca…". È corretto dire che sei aperto a nuovi ruoli? Se no, togli quella parte.
+- [ ] **Traiettoria → intro**: "Ingegnere informatico di formazione, AI applicata di mestiere…".
+- [ ] **Strumenti**: elenco ricavato dai repo (requirements, import, Makefile, report LaTeX) più Vue.js e Claude Code dal brief. Vuoi aggiungere altro, ad esempio Docker, cloud o SQL specifici?
+- [ ] **Demo tesi**: i nomi delle diagnosi nell'esempio giocattolo sono in inglese anche nella pagina italiana (termini medici). Dimmi se li vuoi tradotti.
 
 ### Per progetto
 

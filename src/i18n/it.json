@@ -1,7 +1,10 @@
 {
   "meta": {
     "title": "Riccardo Bedogni — AI Engineer · Data & ML",
-    "description": "AI Engineer e studente di Ingegneria Informatica a Reggio Emilia. Sistemi di retrieval, schema matching e machine learning, costruiti e misurati con onestà."
+    "description": "AI Engineer e studente di Ingegneria Informatica a Reggio Emilia. Sistemi di retrieval, schema matching e machine learning, costruiti e misurati con onestà.",
+    "ogLine": "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione.",
+    "ogProject": "Caso di studio",
+    "personDesc": "AI Engineer e Software Developer in OT Consulting; studente di Laurea Magistrale in Ingegneria Informatica all'Università di Modena e Reggio Emilia."
   },
   "nav": {
     "trajectory": "Traiettoria",

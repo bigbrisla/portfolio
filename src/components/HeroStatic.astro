@@ -4,7 +4,7 @@
  * similarity arcs. Rendered at build time, so it is also the no-JS and
  * reduced-motion fallback for the interactive point cloud (milestone 3).
  */
-import { seeded, gaussian } from '@/lib/rand';
+import { seeded, gaussian, dotsPath } from '@/lib/rand';
 
 const rand = seeded('latent-space');
 const W = 1200;
@@ -47,21 +47,9 @@ const arcPath = (a: { x: number; y: number }, b: { x: number; y: number }) => {
   aria-hidden="true"
   focusable="false"
 >
-  <g class="noise">
-    {noise.map((p) => (
-      <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r={p.r.toFixed(2)} />
-    ))}
-  </g>
-  <g class="pts">
-    {points.map((p) => (
-      <circle
-        cx={p.x.toFixed(1)}
-        cy={p.y.toFixed(1)}
-        r={p.r.toFixed(2)}
-        class={p.c === 1 ? 'hot' : undefined}
-      />
-    ))}
-  </g>
+  <path class="noise" d={dotsPath(noise)} />
+  <path class="pts" d={dotsPath(points.filter((p) => p.c !== 1))} />
+  <path class="pts hot" d={dotsPath(points.filter((p) => p.c === 1))} />
   <g class="arcs">
     {arcs.map(({ a, b, score }) => (
       <g>
@@ -79,14 +67,14 @@ const arcPath = (a: { x: number; y: number }, b: { x: number; y: number }) => {
     width: 100%;
     height: 100%;
   }
-  .noise circle {
+  .noise {
     fill: var(--point);
     opacity: 0.35;
   }
-  .pts circle {
+  .pts {
     fill: var(--point);
   }
-  .pts circle.hot {
+  .pts.hot {
     fill: var(--signal);
     opacity: 0.85;
   }

@@ -16,6 +16,7 @@
   --line-strong: #b9b4a6;
   --signal: #0b7a5e;
   --signal-soft: rgb(11 122 94 / 0.12);
+  --signal-strong: #08624b; /* text on --signal-soft */
   --data: #2f5bd3;
   --data-soft: rgb(47 91 211 / 0.1);
   --point: rgb(20 22 26 / 0.55);
@@ -76,6 +77,7 @@
     --line-strong: #353a43;
     --signal: #2fd4a6;
     --signal-soft: rgb(47 212 166 / 0.12);
+    --signal-strong: #2fd4a6;
     --data: #7fa6ff;
     --data-soft: rgb(127 166 255 / 0.12);
     --point: rgb(231 229 223 / 0.6);
@@ -96,6 +98,7 @@
   --line-strong: #353a43;
   --signal: #2fd4a6;
   --signal-soft: rgb(47 212 166 / 0.12);
+  --signal-strong: #2fd4a6;
   --data: #7fa6ff;
   --data-soft: rgb(127 166 255 / 0.12);
   --point: rgb(231 229 223 / 0.6);

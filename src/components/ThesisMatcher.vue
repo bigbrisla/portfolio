@@ -199,7 +199,7 @@ const arc = (i: number) => {
 }
 .tm__head {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   fill: var(--ink-muted);
@@ -210,7 +210,7 @@ const arc = (i: number) => {
 }
 .tm__name {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 15px;
   fill: var(--ink);
 }
 .tm__arc {
@@ -231,7 +231,7 @@ const arc = (i: number) => {
 }
 .tm__score {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 15px;
 }
 .tm__score--exact {
   fill: var(--data);
@@ -269,7 +269,7 @@ const arc = (i: number) => {
 }
 .state.ok {
   background: var(--signal-soft);
-  color: var(--signal);
+  color: var(--signal-strong);
 }
 .state.ko {
   background: var(--bg-sunken);

@@ -9,6 +9,8 @@ const SITE = 'https://riccardo-bedogni.pages.dev';
 export default defineConfig({
   site: SITE,
   trailingSlash: 'ignore',
+  // CSS is small; inlining removes the render-blocking request on first paint
+  build: { inlineStylesheets: 'always' },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'it'],

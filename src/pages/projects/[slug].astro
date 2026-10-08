@@ -1,7 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import ProjectDetail from '@/components/ProjectDetail.astro';
-import { projectPaths, type Project } from '@/lib/projects';
+import { projectPaths, slugOf, type Project } from '@/lib/projects';
 
 export async function getStaticPaths() {
   return projectPaths('en');
@@ -9,6 +9,11 @@ export async function getStaticPaths() {
 const { project } = Astro.props as { project: Project };
 ---
 
-<Base title={`${project.data.title} — Riccardo Bedogni`} description={project.data.pitch}>
+<Base
+  title={`${project.data.title} — Riccardo Bedogni`}
+  description={project.data.pitch}
+  ogImage={`/og/en/${slugOf(project)}.png`}
+  ogType="article"
+>
   <ProjectDetail project={project} />
 </Base>

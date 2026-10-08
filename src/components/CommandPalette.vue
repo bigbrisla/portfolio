@@ -204,7 +204,8 @@ function onGlobalKey(e: KeyboardEvent) {
   const typing = (e.target as HTMLElement)?.closest?.('input, textarea, [contenteditable]');
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
-    open.value ? hide() : show();
+    if (open.value) hide();
+    else show();
   } else if (e.key === '/' && !typing && !open.value) {
     e.preventDefault();
     show();

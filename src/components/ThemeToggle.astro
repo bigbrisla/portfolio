@@ -31,7 +31,9 @@ const { label } = Astro.props;
     root.dataset.theme = next;
     try {
       localStorage.setItem('theme', next);
-    } catch {}
+    } catch {
+      /* storage unavailable (private mode) */
+    }
     document
       .querySelectorAll('[data-theme-toggle]')
       .forEach((b) => b.setAttribute('aria-pressed', String(next === 'dark')));

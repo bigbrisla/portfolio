@@ -41,7 +41,6 @@ export function initPointCloud(root: HTMLElement) {
   let height = 0;
   let ink = '#14161a';
   let accent = '#0b7a5e';
-  let raf = 0;
   let running = false;
   let visible = true;
   let start = 0;
@@ -170,7 +169,7 @@ export function initPointCloud(root: HTMLElement) {
     }
 
     if (moving && visible) {
-      raf = requestAnimationFrame(tick);
+      requestAnimationFrame(tick);
     } else {
       running = false;
     }
@@ -179,7 +178,7 @@ export function initPointCloud(root: HTMLElement) {
   function wake() {
     if (running || !visible || document.hidden) return;
     running = true;
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
 
   const onMove = (e: PointerEvent) => {

@@ -41,7 +41,7 @@ The decisions that mattered:
 
 40 questions across 7 failure modes. The report's tables are generated straight from the evaluation output files.
 
-|                         | Full system | Weak baseline | No RAG |
+| Metric                  | Full system | Weak baseline | No RAG |
 | ----------------------- | ----------- | ------------- | ------ |
 | recall@6                | **0.750**   | 0.255         | —      |
 | MRR                     | **0.662**   | 0.173         | —      |

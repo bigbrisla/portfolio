@@ -106,7 +106,8 @@ const hasCv = fs.existsSync(path.join(process.cwd(), 'public', LINKS.cv));
   }
   .contact__addr {
     font-family: var(--font-display);
-    font-size: var(--step-3);
+    /* sized so the address fits on one line down to 320px */
+    font-size: clamp(1.3rem, 6.4vw, 3.2rem);
     line-height: 1.1;
     text-decoration-color: var(--signal);
     overflow-wrap: anywhere;

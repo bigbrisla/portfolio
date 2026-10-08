@@ -41,7 +41,7 @@ Le scelte che hanno contato:
 
 40 domande su 7 tipi di errore. Le tabelle del report sono generate direttamente dai file di valutazione.
 
-|                                | Sistema completo | Baseline debole | Senza RAG |
+| Metrica                        | Sistema completo | Baseline debole | Senza RAG |
 | ------------------------------ | ---------------- | --------------- | --------- |
 | recall@6                       | **0,750**        | 0,255           | —         |
 | MRR                            | **0,662**        | 0,173           | —         |
