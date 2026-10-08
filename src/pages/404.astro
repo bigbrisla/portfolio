@@ -1,0 +1,25 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base title="404 — Riccardo Bedogni" noindex>
+  <section class="container nf">
+    <p class="label">distance = ∞</p>
+    <h1 class="display">No neighbours found.</h1>
+    <p lang="it">Nessun vicino trovato.</p>
+    <p>
+      <a href="/">← Home</a> · <a href="/it/">← Home (IT)</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    gap: var(--s-4);
+    padding-block: var(--s-9);
+  }
+  h1 {
+    font-size: var(--step-4);
+  }
+</style>

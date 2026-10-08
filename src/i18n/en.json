@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Riccardo Bedogni — AI Engineer · Data & ML",
+    "description": "AI Engineer and computer engineering MSc student in Reggio Emilia. Retrieval systems, schema matching and machine learning, built and measured honestly."
+  },
+  "nav": {
+    "trajectory": "Trajectory",
+    "work": "Work",
+    "thesis": "Thesis",
+    "method": "Method",
+    "toolkit": "Toolkit",
+    "contact": "Contact",
+    "skip": "Skip to content",
+    "home": "Home",
+    "search": "Search",
+    "menu": "Menu"
+  },
+  "theme": { "toggle": "Toggle theme", "light": "Light", "dark": "Dark" },
+  "lang": { "switch": "Leggi in italiano", "short": "IT", "label": "Language" },
+  "hero": {
+    "role": "AI Engineer · Data & ML",
+    "line": "I build systems that find what's similar — and measure whether they're right.",
+    "ctaWork": "See the work",
+    "ctaContact": "Get in touch",
+    "location": "Reggio Emilia, IT"
+  },
+  "sections": {
+    "trajectory": { "index": "01", "title": "Trajectory" },
+    "work": { "index": "02", "title": "Work" },
+    "thesis": { "index": "03", "title": "Thesis" },
+    "method": { "index": "04", "title": "Method" },
+    "toolkit": { "index": "05", "title": "Toolkit" },
+    "contact": { "index": "06", "title": "Contact" }
+  },
+  "placeholder": "Content arrives in milestone {n}.",
+  "footer": { "built": "Built with Astro. No trackers.", "top": "Back to top" }
+}

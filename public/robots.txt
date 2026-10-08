@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://riccardo-bedogni.pages.dev/sitemap-index.xml

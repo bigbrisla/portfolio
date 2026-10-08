@@ -1,0 +1,178 @@
+---
+import HeroStatic from './HeroStatic.astro';
+import SectionHeader from './SectionHeader.astro';
+import { getLocale, useTranslations, fill } from '@/i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+// Skeleton: each section is filled in a later milestone.
+const sections = [
+  { id: 'trajectory', milestone: 3 },
+  { id: 'work', milestone: 3 },
+  { id: 'thesis', milestone: 4 },
+  { id: 'method', milestone: 4 },
+  { id: 'toolkit', milestone: 4 },
+  { id: 'contact', milestone: 5 },
+] as const;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__visual">
+    <HeroStatic />
+  </div>
+  <div class="container hero__content">
+    <p class="label hero__meta">
+      <span class="dot" aria-hidden="true"></span>
+      {t.hero.location} · [44.70, 10.63]
+    </p>
+    <h1 id="hero-title" class="display hero__name">
+      Riccardo
+      <br />
+      <em>Bedogni</em>
+    </h1>
+    <p class="hero__role mono">{t.hero.role}</p>
+    <p class="hero__line">{t.hero.line}</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#work">
+        {t.hero.ctaWork}
+      </a>
+      <a class="btn" href="#contact">
+        {t.hero.ctaContact}
+      </a>
+    </div>
+  </div>
+</section>
+
+{sections.map(({ id, milestone }) => {
+  const s = t.sections[id];
+  return (
+    <section id={id} class="section container" aria-labelledby={`${id}-title`}>
+      <SectionHeader id={id} index={s.index} title={s.title} />
+      <div class="placeholder grid-bg">
+        <p class="mono">{fill(t.placeholder, { n: milestone })}</p>
+      </div>
+    </section>
+  );
+})}
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(92svh, 860px);
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero__visual {
+    position: absolute;
+    inset: 0;
+    opacity: 0.9;
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+  /* soft scrim so points never compete with the text block */
+  .hero__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 52% 62% at 18% 72%,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 80%, transparent) 45%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 720px) {
+    .hero__visual::after {
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 38%,
+        color-mix(in srgb, var(--bg) 70%, transparent) 62%,
+        var(--bg) 100%
+      );
+    }
+  }
+  .hero__content {
+    position: relative;
+    padding-block: var(--s-9) var(--s-8);
+  }
+  .hero__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    margin-bottom: var(--s-5);
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 4px var(--signal-soft);
+  }
+  .hero__name {
+    font-size: var(--step-5);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .hero__name em {
+    font-style: italic;
+    color: var(--signal);
+  }
+  .hero__role {
+    margin-top: var(--s-5);
+    color: var(--ink-muted);
+  }
+  .hero__line {
+    max-width: 34ch;
+    margin-top: var(--s-3);
+    font-size: var(--step-1);
+    line-height: 1.35;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-6);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 var(--s-5);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    text-decoration: none;
+    font-weight: 500;
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      background var(--dur-fast) var(--ease);
+  }
+  .btn:hover {
+    border-color: var(--ink);
+  }
+  .btn--primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .btn--primary:hover {
+    background: var(--signal);
+    border-color: var(--signal);
+  }
+
+  .section {
+    padding-top: var(--section-gap);
+  }
+  .placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 220px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-m);
+    color: var(--ink-muted);
+  }
+</style>

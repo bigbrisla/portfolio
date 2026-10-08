@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Riccardo Bedogni — AI Engineer · Data & ML",
+    "description": "AI Engineer e studente di Ingegneria Informatica a Reggio Emilia. Sistemi di retrieval, schema matching e machine learning, costruiti e misurati con onestà."
+  },
+  "nav": {
+    "trajectory": "Traiettoria",
+    "work": "Lavori",
+    "thesis": "Tesi",
+    "method": "Metodo",
+    "toolkit": "Strumenti",
+    "contact": "Contatti",
+    "skip": "Vai al contenuto",
+    "home": "Home",
+    "search": "Cerca",
+    "menu": "Menu"
+  },
+  "theme": { "toggle": "Cambia tema", "light": "Chiaro", "dark": "Scuro" },
+  "lang": { "switch": "Read in English", "short": "EN", "label": "Lingua" },
+  "hero": {
+    "role": "AI Engineer · Data & ML",
+    "line": "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione.",
+    "ctaWork": "Guarda i lavori",
+    "ctaContact": "Scrivimi",
+    "location": "Reggio Emilia"
+  },
+  "sections": {
+    "trajectory": { "index": "01", "title": "Traiettoria" },
+    "work": { "index": "02", "title": "Lavori" },
+    "thesis": { "index": "03", "title": "Tesi" },
+    "method": { "index": "04", "title": "Metodo" },
+    "toolkit": { "index": "05", "title": "Strumenti" },
+    "contact": { "index": "06", "title": "Contatti" }
+  },
+  "placeholder": "Contenuto in arrivo nella milestone {n}.",
+  "footer": { "built": "Fatto con Astro. Nessun tracker.", "top": "Torna su" }
+}

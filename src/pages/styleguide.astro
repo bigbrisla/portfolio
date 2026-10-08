@@ -1,0 +1,230 @@
+---
+/** Style tile for milestone 1 review. Not linked, not indexed, excluded from the sitemap. */
+import Base from '@/layouts/Base.astro';
+
+const swatches = [
+  ['--bg', 'Paper / Night'],
+  ['--bg-raised', 'Raised'],
+  ['--bg-sunken', 'Sunken'],
+  ['--ink', 'Ink'],
+  ['--ink-muted', 'Muted'],
+  ['--line', 'Line'],
+  ['--signal', 'Signal (accent)'],
+  ['--data', 'Data (charts only)'],
+];
+const steps = ['5', '4', '3', '2', '1', '0', '-1'];
+const spaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+---
+
+<Base title="Style tile — Latent Space" noindex>
+  <div class="container sg">
+    <header>
+      <p class="label">Milestone 1 · design tokens</p>
+      <h1 class="display">Latent Space</h1>
+      <p class="lead">
+        Warm paper and deep ink, one signal accent, one cool tone reserved for data. Serif display
+        for voice, a tight grotesque for reading, mono for numbers and coordinates. Toggle the theme
+        in the header to compare.
+      </p>
+    </header>
+
+    <section>
+      <h2 class="label">Colour</h2>
+      <ul class="swatches">
+        {swatches.map(([v, name]) => (
+          <li>
+            <span class="chip" style={`background: var(${v})`} />
+            <span>{name}</span>
+            <code class="mono">{v}</code>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="label">Type</h2>
+      <div class="type">
+        <p class="display" style="font-size: var(--step-5); line-height: .95">
+          Riccardo <em style="color: var(--signal)">Bedogni</em>
+        </p>
+        <p class="display" style="font-size: var(--step-3)">
+          Retrieval quality and accuracy decouple.
+        </p>
+        <p style="font-size: var(--step-1); max-width: 40ch; line-height: 1.4">
+          Inter Tight for reading — compact, neutral, good at small sizes and in Italian.
+        </p>
+        <p style="max-width: var(--measure)">
+          Body text at step 0. The hypothesis was rejected, and the negative result is the most
+          useful thing the project produced. Il protocollo di validazione conta quanto la scelta del
+          modello?
+        </p>
+        <p class="mono">recall@6 0.750 · MRR 0.662 · nDCG@6 0.873 · [44.70, 10.63]</p>
+        <p class="label">Label · uppercase mono</p>
+      </div>
+      <ul class="scale mono">
+        {steps.map((s) => (
+          <li style={`font-size: var(--step-${s})`}>step {s} — Aa</li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="label">Space</h2>
+      <ul class="space">
+        {spaces.map((s) => (
+          <li>
+            <span class="bar" style={`width: var(--s-${s})`} />
+            <code class="mono">--s-{s}</code>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="label">Elements</h2>
+      <div class="elements">
+        <a class="btn btn--primary" href="#">
+          Primary action
+        </a>
+        <a class="btn" href="#">
+          Secondary
+        </a>
+        <span class="tag mono">Python</span>
+        <span class="tag mono">ChromaDB</span>
+        <span class="score mono">
+          <span class="score__dot"></span>0.87
+        </span>
+        <kbd class="mono">⌘ K</kbd>
+      </div>
+      <div class="card grid-bg">
+        <p class="label">Featured · [0.12, 0.88]</p>
+        <p class="display" style="font-size: var(--step-2)">
+          Grounded RAG on the EU AI Act
+        </p>
+        <p style="color: var(--ink-muted)">
+          Card surface sample: raised background, hairline border.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .sg {
+    display: grid;
+    gap: var(--s-8);
+    padding-block: var(--s-8);
+  }
+  h1 {
+    font-size: var(--step-4);
+    margin-block: var(--s-3);
+  }
+  .lead {
+    max-width: 60ch;
+    color: var(--ink-muted);
+  }
+  section > h2 {
+    margin-bottom: var(--s-5);
+  }
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--s-4);
+    padding: 0;
+    list-style: none;
+  }
+  .swatches li {
+    display: grid;
+    gap: var(--s-1);
+    font-size: 0.9rem;
+  }
+  .chip {
+    height: 72px;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--line);
+  }
+  .swatches code {
+    color: var(--ink-muted);
+    font-size: 0.75rem;
+  }
+  .type {
+    display: grid;
+    gap: var(--s-4);
+  }
+  .scale,
+  .space {
+    display: grid;
+    gap: var(--s-2);
+    margin-top: var(--s-6);
+    padding: 0;
+    list-style: none;
+    color: var(--ink-muted);
+  }
+  .space li {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+  .bar {
+    height: 10px;
+    background: var(--signal);
+    border-radius: 2px;
+  }
+  .elements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-6);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 var(--s-5);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn--primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .tag {
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    font-size: 0.75rem;
+  }
+  .score {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--signal);
+  }
+  .score__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+  }
+  kbd {
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--radius-s);
+    font-size: 0.75rem;
+  }
+  .card {
+    display: grid;
+    gap: var(--s-3);
+    max-width: 520px;
+    padding: var(--s-6);
+    background-color: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+  }
+</style>

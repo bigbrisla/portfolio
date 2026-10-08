@@ -1,0 +1,32 @@
+---
+import { getLocale, useTranslations } from '@/i18n/utils';
+const t = useTranslations(getLocale(Astro.url));
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="mono">© {year} Riccardo Bedogni</p>
+    <p class="mono footer__muted">{t.footer.built}</p>
+    <a class="mono" href="#main">
+      {t.footer.top} ↑
+    </a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+    margin-top: var(--section-gap);
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-3) var(--s-5);
+    padding-block: var(--s-6);
+  }
+  .footer__muted {
+    color: var(--ink-muted);
+  }
+</style>
