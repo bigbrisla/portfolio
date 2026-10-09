@@ -339,3 +339,11 @@ button {
     min-width: 640px;
   }
 }
+.prose video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--bg-sunken);
+}

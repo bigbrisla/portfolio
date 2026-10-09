@@ -11,6 +11,11 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 - [x] Lavoro in OT Consulting: descritto con le voci del CV (backend Python/REST per clienti enterprise, full-stack Vue.js + SQLAlchemy + MySQL, migrazione su Google Cloud; stage: sistema predittivo + LLM + FastAPI). Ho scelto di **non** nominare il cliente o l'app specifica.
 - [ ] Frase hero: "I build systems that find what's similar — and measure whether they're right." / "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione."
 
+### RAGView (aggiunto il 2026-10-09)
+
+- [x] Il "RAG Pipeline Visualizer" in arrivo è diventato il progetto **RAGView**: caso di studio da `~/Desktop/ragview/README.md`, copertina = screenshot chiaro, video demo con poster, metriche dalla tabella di valutazione del README.
+- [ ] Il repo `ragview` non ha ancora commit né remote: niente link GitHub o demo sul sito finché non è pubblicato.
+
 ### Dal CV
 
 - [x] CV pubblicato in `public/cv/riccardo-bedogni-cv.pdf` (contiene solo email, città e link; metadati PDF vuoti).
@@ -57,7 +62,7 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 - [ ] Screenshot della UI Streamlit del RAG (copertina del progetto principale).
 - [ ] Screenshot della dashboard di Smart Parking Premium.
 - [ ] (Opzionale) GIF o clip breve della pipeline Tactical Football con bounding box e squadre.
-- [ ] Link alla demo del RAG Pipeline Visualizer quando sarà pubblica (campo `demo` in `src/content/projects/*/rag-visualizer.md`).
+- [ ] **RAGView**: quando pubblichi repo e demo, aggiungi `repo:` e `demo:` nel frontmatter di `src/content/projects/{en,it}/ragview.md` e togli il riquadro "Repository e demo in arrivo" in fondo.
 
 ## README da migliorare (attività separata, opzionale)
 
