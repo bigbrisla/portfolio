@@ -14,7 +14,7 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 ### RAGView (aggiunto il 2026-10-09)
 
 - [x] Il "RAG Pipeline Visualizer" in arrivo è diventato il progetto **RAGView**: caso di studio da `~/Desktop/ragview/README.md`, copertina = screenshot chiaro, video demo con poster, metriche dalla tabella di valutazione del README.
-- [ ] Il repo `ragview` non ha ancora commit né remote: niente link GitHub o demo sul sito finché non è pubblicato.
+- [x] Repo pubblicato (github.com/bigbrisla/rag_view) e demo su GitHub Pages (bigbrisla.github.io/rag_view): collegati in card e pagina. Testo di parità aggiornato al README (5e-7 sulla stessa macchina, tolleranza ~0,015 tra architetture).
 
 ### Dal CV
 
@@ -62,7 +62,6 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 - [ ] Screenshot della UI Streamlit del RAG (copertina del progetto principale).
 - [ ] Screenshot della dashboard di Smart Parking Premium.
 - [ ] (Opzionale) GIF o clip breve della pipeline Tactical Football con bounding box e squadre.
-- [ ] **RAGView**: quando pubblichi repo e demo, aggiungi `repo:` e `demo:` nel frontmatter di `src/content/projects/{en,it}/ragview.md` e togli il riquadro "Repository e demo in arrivo" in fondo.
 
 ## README da migliorare (attività separata, opzionale)
 

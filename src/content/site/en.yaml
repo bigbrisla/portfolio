@@ -51,6 +51,7 @@ work:
   readCase: Read the case study
   repo: Repository
   demoSoon: Demo link coming soon
+  liveDemo: Live demo
 
 thesis:
   kicker: University project · Schema matching & data integration

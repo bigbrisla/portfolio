@@ -54,6 +54,7 @@ const site = defineCollection({
       readCase: text,
       repo: text,
       demoSoon: text,
+      liveDemo: text,
     }),
     thesis: z.object({
       kicker: text,

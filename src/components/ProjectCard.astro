@@ -7,7 +7,14 @@ import { localizedPath, type Locale } from '@/i18n/utils';
 interface Props {
   project: Project;
   locale: Locale;
-  labels: { featured: string; upcoming: string; readCase: string; repo: string; demoSoon: string };
+  labels: {
+    featured: string;
+    upcoming: string;
+    readCase: string;
+    repo: string;
+    demoSoon: string;
+    liveDemo: string;
+  };
   index: number;
 }
 const { project, locale, labels, index } = Astro.props;
@@ -91,8 +98,12 @@ const coord = (n: number) => ((((n * 9301 + 49297) % 233280) / 233280) * 2 - 1).
 
     <p class="card__foot mono">
       {href && <span aria-hidden="true">{labels.readCase} →</span>}
-      {d.tier === 'upcoming' &&
-        (d.demo ? <a href={d.demo}>Demo ↗</a> : <span>{labels.demoSoon}</span>)}
+      {d.tier === 'upcoming' && !d.demo && <span>{labels.demoSoon}</span>}
+      {d.demo && (
+        <a class="card__demo" href={d.demo} rel="noopener">
+          {labels.liveDemo} ↗
+        </a>
+      )}
     </p>
   </div>
 </article>
@@ -260,6 +271,16 @@ const coord = (n: number) => ((((n * 9301 + 49297) % 233280) / 233280) * 2 - 1).
   .card__foot a {
     position: relative;
     z-index: 2;
+  }
+  .card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-2) var(--s-4);
+  }
+  .card__demo {
+    color: var(--signal-strong);
+    text-decoration-color: var(--signal);
   }
 
   /* — tiers — */
