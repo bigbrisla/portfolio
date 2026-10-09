@@ -8,9 +8,11 @@ const SITE = 'https://riccardo-bedogni.pages.dev';
 
 export default defineConfig({
   site: SITE,
-  trailingSlash: 'ignore',
+  // flat files (projects/foo.html): Cloudflare Pages serves /projects/foo with no redirect,
+  // so every internal link and canonical URL is used without a trailing slash
+  trailingSlash: 'never',
   // CSS is small; inlining removes the render-blocking request on first paint
-  build: { inlineStylesheets: 'always' },
+  build: { inlineStylesheets: 'always', format: 'file' },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'it'],

@@ -10,7 +10,7 @@ const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 const other = locale === 'en' ? 'it' : 'en';
 const home = localizedPath('/', locale);
-const anchor = (id: string) => `${home === '/' ? '' : home}/#${id}`;
+const anchor = (id: string) => `${home}#${id}`;
 const hasCv = fs.existsSync(path.join(process.cwd(), 'public', LINKS.cv));
 
 const sectionIds = ['trajectory', 'work', 'thesis', 'method', 'toolkit', 'contact'] as const;

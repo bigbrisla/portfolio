@@ -5,7 +5,7 @@ import Footer from '@/components/Footer.astro';
 import Palette from '@/components/Palette.astro';
 // preload the display face: it carries the name and every heading
 import instrumentSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
-import { getLocale, useTranslations, alternatePath } from '@/i18n/utils';
+import { getLocale, useTranslations, alternatePath, cleanPath } from '@/i18n/utils';
 import { LINKS, PERSON } from '@/lib/site';
 
 interface Props {
@@ -34,7 +34,7 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: PERSON.name,
-  url: new URL(locale === 'it' ? '/it/' : '/', Astro.site).href,
+  url: new URL(locale === 'it' ? '/it' : '/', Astro.site).href,
   image: ogUrl.href,
   jobTitle: PERSON.jobTitle,
   description: t.meta.personDesc,
@@ -54,7 +54,7 @@ const personLd = {
     'Vue.js',
   ],
 };
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site);
 const altEn = new URL(alternatePath(Astro.url, 'en'), Astro.site);
 const altIt = new URL(alternatePath(Astro.url, 'it'), Astro.site);
 ---

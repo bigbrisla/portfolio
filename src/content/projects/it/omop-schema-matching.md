@@ -34,4 +34,4 @@ L'esperimento misura la Recall@ground truth media dei matcher esatto, semantico 
 
 ## Contesto
 
-Un progetto universitario all'Università di Modena e Reggio Emilia. La [sezione Ricerca](/it/#thesis) spiega l'idea senza gergo tecnico.
+Un progetto universitario all'Università di Modena e Reggio Emilia. La [sezione Ricerca](/it#thesis) spiega l'idea senza gergo tecnico.

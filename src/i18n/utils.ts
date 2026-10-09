@@ -8,8 +8,20 @@ export const defaultLocale: Locale = 'en';
 const dictionaries = { en, it } as const;
 export type Dictionary = typeof en;
 
+/**
+ * Public path of a page: no `.html`, no `index`, no trailing slash
+ * (the build emits flat files like `it.html` and `projects/foo.html`).
+ */
+export function cleanPath(pathname: string): string {
+  const p = pathname
+    .replace(/\.html$/, '')
+    .replace(/\/index$/, '')
+    .replace(/\/+$/, '');
+  return p === '' ? '/' : p;
+}
+
 export function getLocale(url: URL): Locale {
-  const [, first] = url.pathname.split('/');
+  const [, first] = cleanPath(url.pathname).split('/');
   return first === 'it' ? 'it' : 'en';
 }
 
@@ -38,7 +50,7 @@ export function localizedPath(route: string, locale: Locale): string {
 
 /** The same page in the other language (used by the language switch and hreflang). */
 export function alternatePath(url: URL, target: Locale): string {
-  const parts = url.pathname.split('/').filter(Boolean);
+  const parts = cleanPath(url.pathname).split('/').filter(Boolean);
   if (parts[0] === 'it') parts.shift();
   // map localised segments back to the neutral route
   for (const [neutral, byLocale] of Object.entries(segments)) {
