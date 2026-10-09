@@ -14,9 +14,10 @@
 
 ## Pubblicazione
 
-- [ ] Crea il repo su GitHub e fai il push (vedi README → Deploy).
-- [ ] Collega Cloudflare Pages (preset Astro, `npm run build`, `dist`, `NODE_VERSION=22`).
-- [ ] Aggiorna `SITE` in `astro.config.mjs` e `public/robots.txt` con l'URL finale.
+- [x] Repo GitHub `bigbrisla/portfolio` creato e pubblicato.
+- [x] Sito online su https://riccardo-bedogni.pages.dev (aggiornamenti: `npm run deploy`).
+- [ ] (Opzionale) deploy automatico a ogni push: due secret su GitHub, vedi README → Deploy.
+- [x] `SITE` già impostato su `riccardo-bedogni.pages.dev`.
 - [ ] (Opzionale) dominio personalizzato → README → Custom domain.
 
 ## Dopo il deploy

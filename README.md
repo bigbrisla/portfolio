@@ -71,33 +71,36 @@ public/                    favicon, robots.txt, _headers (Cloudflare Pages)
 
 ## Deploy: Cloudflare Pages (free)
 
-Why Cloudflare Pages: free and without bandwidth limits for a static site, a fast global CDN, support for the custom `_headers` file (cache and security headers are already set up), and a custom domain in two clicks. The free tiers of Vercel and Netlify would work just as well. GitHub Pages also works but ignores `_headers`.
+**Live:** https://riccardo-bedogni.pages.dev (Pages project `riccardo-bedogni`, created with direct upload).
 
-1. **Push to GitHub.**
-   ```bash
-   git remote add origin git@github.com:bigbrisla/portfolio.git
-   git push -u origin main
-   ```
-2. In the **Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git**, pick the repo and set:
-   - Framework preset: **Astro**
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Environment variable: `NODE_VERSION = 22`
-3. Deploy. The site goes live at `https://<project>.pages.dev`, and every push to `main` redeploys. Pull requests get preview URLs.
-4. **Set the real URL.** If the `pages.dev` name isn't `riccardo-bedogni`, update `SITE` in `astro.config.mjs` and the `Sitemap:` line in `public/robots.txt`. Canonical URLs, hreflang, Open Graph and the sitemap all derive from `SITE`.
+### Publish an update
+
+```bash
+npm run deploy     # build + wrangler pages deploy dist (asks for a Cloudflare login the first time)
+```
+
+The build emits flat files (`projects/foo.html`, `build.format: 'file'`), so Pages serves every URL without a trailing-slash redirect. Canonical URLs, hreflang, Open Graph and the sitemap all derive from `SITE` in `astro.config.mjs`.
+
+### Optional: deploy automatically on every push
+
+The `deploy` job in `.github/workflows/ci.yml` publishes `dist/` after a green build, but it only runs once two repository secrets exist. Until then it is skipped and CI still passes.
+
+1. Cloudflare dashboard → **My Profile → API Tokens → Create Token** → template **"Edit Cloudflare Workers"**, or a custom token with _Account → Cloudflare Pages → Edit_.
+2. GitHub → `bigbrisla/portfolio` → **Settings → Secrets and variables → Actions → New repository secret**:
+   - `CLOUDFLARE_API_TOKEN`: the token from step 1
+   - `CLOUDFLARE_ACCOUNT_ID`: shown in the Cloudflare dashboard sidebar (Workers & Pages → Account ID)
 
 ### Custom domain
 
-1. Buy the domain (Cloudflare Registrar sells at cost; for example `riccardobedogni.dev` or `bedogni.ai`).
-2. Pages project → **Custom domains → Set up a domain** → enter it. If the domain is on Cloudflare DNS, the record is created automatically. Otherwise add the `CNAME` that Cloudflare shows you at your registrar.
-3. Update `SITE` in `astro.config.mjs` and `public/robots.txt`, then push.
-4. Optional: in the dashboard, redirect `www.` to the apex domain.
+1. Buy the domain (Cloudflare Registrar sells at cost).
+2. Workers & Pages → `riccardo-bedogni` → **Custom domains → Set up a domain**. On Cloudflare DNS the record is created for you; elsewhere, add the `CNAME` it shows.
+3. Update `SITE` in `astro.config.mjs` and the `Sitemap:` line in `public/robots.txt`, then `npm run deploy`.
 
-No secrets are needed anywhere. The site has no backend and no API keys.
+No secrets live in the repository. The site has no backend and no API keys.
 
 ## CI
 
-`.github/workflows/ci.yml` runs `npm ci`, `lint`, `check` and `build` on every push to `main` and on every PR. Cloudflare does the deploy through its own Git integration.
+`.github/workflows/ci.yml` runs `npm ci`, `lint`, `check` and `build` on every push to `main` and on every PR, then deploys if the Cloudflare secrets are set (see above).
 
 ## Quality bar (measured locally, `npm run preview`)
 
