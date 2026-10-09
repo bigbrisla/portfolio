@@ -4,7 +4,7 @@ pitch: A parking digital twin. A webcam over a paper mock-up updates each slot's
 tier: compact
 order: 5
 year: 2026
-kind: IoT · Computer vision · Backend
+kind: IoT · Computer vision · University project
 stack: [Python, FastAPI, OpenCV, YOLO, python-telegram-bot, pytest]
 repo: https://github.com/bigbrisla/smart-parking-premium
 metrics: []

@@ -7,9 +7,17 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 
 ### Generali
 
-- [ ] Anni della laurea triennale (ateneo, inizio/fine): per ora la Traiettoria non la include. Se vuoi, si aggiunge un punto in `src/content/site/*.yaml`.
-- [ ] Cosa posso dire pubblicamente del lavoro in OT Consulting (tipo di progetti, uso quotidiano dell'AI). Oggi la Traiettoria dice solo "Python e Vue.js tutti i giorni, più le attività di machine learning".
+- [x] Anni della laurea triennale: presi dal CV (Informatica, UNIMORE, 09/2022–07/2025) e aggiunti alla Traiettoria insieme allo stage in Max Mara (05–06/2021).
+- [x] Lavoro in OT Consulting: descritto con le voci del CV (backend Python/REST per clienti enterprise, full-stack Vue.js + SQLAlchemy + MySQL, migrazione su Google Cloud; stage: sistema predittivo + LLM + FastAPI). Ho scelto di **non** nominare il cliente o l'app specifica.
 - [ ] Frase hero: "I build systems that find what's similar — and measure whether they're right." / "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione."
+
+### Dal CV
+
+- [x] CV pubblicato in `public/cv/riccardo-bedogni-cv.pdf` (contiene solo email, città e link; metadati PDF vuoti).
+- [x] Smart Parking segnato come "Progetto universitario"; Strumenti integrati con le competenze del CV (Java, C++, Flask, SQLAlchemy, MySQL, SQLite, LangChain, OpenAI API, Gemini, Google Cloud, Linux/Bash, Agile).
+- [ ] **Incoerenza CV ↔ repo (Smart Parking)**: il CV dice "YOLOv11 computer vision for vehicle detection", ma il README del repo dice che YOLOv11 pre-addestrato trova 0 macchinine e che il default è la CV classica. Il sito segue il repo: conviene correggere il CV.
+- [ ] Il CV elenca "RAG System for a Culinary Knowledge Base" (il repo Datapizza, escluso dal sito su tua richiesta). Va bene così?
+- [ ] HR Case Study: dal CV non risulta se era individuale o di gruppo.
 
 ### Correzioni applicate
 

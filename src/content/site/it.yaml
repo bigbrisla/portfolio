@@ -8,24 +8,39 @@ hero:
 
 trajectory:
   intro: >-
-    Ingegnere informatico di formazione, AI applicata di mestiere. Il filo conduttore sono dati da
+    Informatica di formazione, AI applicata di mestiere. Il filo conduttore sono dati da
     abbinare, recuperare o prevedere, e la domanda su come si fa a sapere che la risposta è giusta.
   steps:
+    - when: Mag 2021
+      title: Software Developer Intern
+      place: Max Mara Fashion Group · Reggio Emilia
+      text: >-
+        Una web app in Flask per monitorare come si distribuisce il tempo tra i progetti aziendali:
+        schema relazionale, logica di business e KPI di efficienza.
+    - when: Set 2022
+      title: Laurea Triennale in Informatica
+      place: Università di Modena e Reggio Emilia
+      text: >-
+        Scienze e Tecnologie Informatiche, conclusa a luglio 2025.
     - when: Mar 2025
       title: AI Engineer Intern
       place: OT Consulting · Reggio Emilia
       text: >-
-        Il primo lavoro di AI engineering in azienda, fuori dall'aula.
+        Un sistema predittivo sul potenziale di successo di nuovi progetti di business: modello
+        scikit-learn, uno strato LLM che scrive report leggibili, servito con FastAPI. Il tempo di
+        analisi è passato da ore a minuti.
     - when: Giu 2025 →
       title: Software Developer & AI Engineer
       place: OT Consulting · Reggio Emilia
       text: >-
-        Python e Vue.js tutti i giorni, più le attività di machine learning.
+        Servizi backend in Python e API REST per clienti enterprise, funzionalità full-stack in Vue.js,
+        SQLAlchemy e MySQL, ML e AI integrati nei progetti, e la migrazione di un'applicazione legacy
+        su Google Cloud.
     - when: Dic 2026
       title: Laurea Magistrale in Ingegneria Informatica
       place: Università di Modena e Reggio Emilia
       text: >-
-        Laurea prevista, all'ultimo tratto del percorso.
+        Curriculum Data Engineering & Analytics, iniziata a settembre 2025. Laurea prevista a dicembre 2026.
 
 work:
   intro: >-
@@ -107,29 +122,43 @@ method:
       - Le funzioni basate su LLM si valutano come qualsiasi altro modello.
 
 toolkit:
-  intro: Solo ciò che compare nei miei progetti.
+  intro: Quello che uso nei miei progetti e al lavoro.
   groups:
     - name: Linguaggi
-      items: [Python, JavaScript, SQL]
+      items: [Python, JavaScript, SQL, Java, C++, HTML e CSS]
     - name: ML e dati
       items:
         [scikit-learn, pandas, NumPy, XGBoost, SHAP, PyTorch, Ultralytics YOLO, OpenCV, ByteTrack]
     - name: Retrieval e LLM
       items:
         [
+          RAG,
           Sentence Transformers,
           ChromaDB,
           BM25,
           Reranking con cross-encoder,
+          LangChain,
           Claude API,
-          Valutazione di RAG,
+          OpenAI API,
+          Gemini,
         ]
-    - name: Backend
-      items: [FastAPI, Pydantic, API REST, Bot Telegram]
+    - name: Backend e database
+      items: [FastAPI, Flask, API REST, SQLAlchemy, Pydantic, MySQL, SQLite, BigQuery]
     - name: Frontend
-      items: [Vue.js, Streamlit, HTML e CSS, Astro]
-    - name: Strumenti
-      items: [Git, pytest, Jupyter, BigQuery, Make, LaTeX, Claude Code]
+      items: [Vue.js, Streamlit, Node.js, Astro]
+    - name: Cloud e strumenti
+      items:
+        [
+          Google Cloud (Cloud Run,
+          Cloud SQL),
+          Git,
+          Linux e Bash,
+          pytest,
+          Jupyter,
+          LaTeX,
+          Claude Code,
+          Agile / Scrum,
+        ]
 
 contact:
   title: Parliamo di dati che devono avere senso.

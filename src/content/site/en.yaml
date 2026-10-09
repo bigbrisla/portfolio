@@ -8,24 +8,39 @@ hero:
 
 trajectory:
   intro: >-
-    Computer engineering by training, applied AI by trade. The thread running through it is
+    Computer science by training, applied AI by trade. The thread running through it is
     data that has to be matched, retrieved or predicted, and the question of how you know the answer is right.
   steps:
+    - when: May 2021
+      title: Software Developer Intern
+      place: Max Mara Fashion Group · Reggio Emilia
+      text: >-
+        A Flask web app to track how time is spent across business projects: relational schema,
+        business logic and the KPIs for time efficiency.
+    - when: Sep 2022
+      title: BSc in Computer Science
+      place: University of Modena and Reggio Emilia
+      text: >-
+        Scienze e Tecnologie Informatiche, completed in July 2025.
     - when: Mar 2025
       title: AI Engineer Intern
       place: OT Consulting · Reggio Emilia
       text: >-
-        My first AI engineering work in a company setting, outside the classroom.
+        A predictive system for the success potential of new business projects: scikit-learn model,
+        an LLM layer that writes readable reports, served with FastAPI. Analysis time went from hours
+        to minutes.
     - when: Jun 2025 →
       title: Software Developer & AI Engineer
       place: OT Consulting · Reggio Emilia
       text: >-
-        Python and Vue.js day to day, plus machine-learning work.
+        Python backend services and REST APIs for enterprise clients, full-stack features in Vue.js,
+        SQLAlchemy and MySQL, ML and AI integrated into client projects, and a legacy app migrated to
+        Google Cloud.
     - when: Dec 2026
       title: MSc in Computer Engineering
       place: University of Modena and Reggio Emilia
       text: >-
-        Expected graduation, in the final stretch of the degree.
+        Data Engineering & Analytics track, started in September 2025. Graduation expected in December 2026.
 
 work:
   intro: >-
@@ -107,22 +122,43 @@ method:
       - Evaluate LLM features like any other model.
 
 toolkit:
-  intro: Only what shows up in my projects.
+  intro: What I use in my projects and at work.
   groups:
     - name: Languages
-      items: [Python, JavaScript, SQL]
+      items: [Python, JavaScript, SQL, Java, C++, HTML & CSS]
     - name: ML & Data
       items:
         [scikit-learn, pandas, NumPy, XGBoost, SHAP, PyTorch, Ultralytics YOLO, OpenCV, ByteTrack]
     - name: Retrieval & LLMs
       items:
-        [Sentence Transformers, ChromaDB, BM25, Cross-encoder reranking, Claude API, RAG evaluation]
-    - name: Backend
-      items: [FastAPI, Pydantic, REST APIs, Telegram bots]
+        [
+          RAG,
+          Sentence Transformers,
+          ChromaDB,
+          BM25,
+          Cross-encoder reranking,
+          LangChain,
+          Claude API,
+          OpenAI API,
+          Gemini,
+        ]
+    - name: Backend & databases
+      items: [FastAPI, Flask, REST APIs, SQLAlchemy, Pydantic, MySQL, SQLite, BigQuery]
     - name: Frontend
-      items: [Vue.js, Streamlit, HTML & CSS, Astro]
-    - name: Tools
-      items: [Git, pytest, Jupyter, BigQuery, Make, LaTeX, Claude Code]
+      items: [Vue.js, Streamlit, Node.js, Astro]
+    - name: Cloud & tools
+      items:
+        [
+          Google Cloud (Cloud Run,
+          Cloud SQL),
+          Git,
+          Linux & Bash,
+          pytest,
+          Jupyter,
+          LaTeX,
+          Claude Code,
+          Agile / Scrum,
+        ]
 
 contact:
   title: Let's talk about data that needs to make sense.

@@ -41,6 +41,7 @@ const personLd = {
   email: `mailto:${LINKS.email}`,
   worksFor: { '@type': 'Organization', name: PERSON.employer },
   affiliation: { '@type': 'CollegeOrUniversity', name: PERSON.university },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: PERSON.university },
   address: { '@type': 'PostalAddress', addressLocality: 'Reggio Emilia', addressCountry: 'IT' },
   sameAs: [LINKS.linkedin, LINKS.github],
   knowsAbout: [
