@@ -1,10 +1,10 @@
 ---
 title: Taxonomy-aware schema matching on OMOP-CDM
-pitch: The code behind my thesis. When clinical codes are slightly wrong, exact matching misses columns that clearly belong together. A similarity built on the SNOMED hierarchy recovers them.
+pitch: A university project on data integration. When clinical codes are slightly wrong, exact matching misses columns that clearly belong together. A similarity built on the SNOMED hierarchy recovers them.
 tier: standard
 order: 4
 year: 2026
-kind: Data integration · Thesis research
+kind: Data integration · University project
 stack: [Python, pandas, Valentine, OMOP-CDM, SNOMED, BigQuery]
 repo: https://github.com/bigbrisla/omop-taxonomic-schema-matching
 metrics: []
@@ -34,4 +34,4 @@ The experiment measures mean Recall@ground truth for exact, semantic and hybrid 
 
 ## Context
 
-This is the research core of my master's thesis at the University of Modena and Reggio Emilia, supervised by Prof. Beneventano. The [thesis section](/#thesis) explains the idea without the jargon.
+A university project at the University of Modena and Reggio Emilia. The [research section](/#thesis) explains the idea without the jargon.

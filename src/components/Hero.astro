@@ -115,11 +115,13 @@ const { copy } = Astro.props;
     color: var(--signal);
   }
   /* once the canvas draws the name, the text stays for a11y/selection but is invisible */
+  /* once the canvas draws the name, the real text stays as a faint ghost under the
+     points: still selectable and accessible, and the name reads even mid-scatter */
   :global(.pc-ready) .hero__name {
-    color: transparent;
+    color: color-mix(in srgb, var(--ink) 13%, transparent);
   }
   :global(.pc-ready) .hero__name em {
-    color: transparent;
+    color: color-mix(in srgb, var(--signal) 16%, transparent);
   }
   .hero__role {
     margin-top: var(--s-5);

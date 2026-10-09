@@ -6,7 +6,7 @@
 - [ ] Chiudi i punti bloccanti di [`CONTENT_TODO.md`](CONTENT_TODO.md), in particolare:
   - [ ] la sezione "Come uso l'AI" (Metodo) descrive davvero il tuo modo di lavorare?
   - [ ] la frase "Disponibile per parlare di ruoli…" (Contatti) va bene?
-  - [ ] risultati della tesi (OMOP), oppure lascia il riquadro "Risultati da inserire"
+  - [ ] risultati del progetto OMOP, oppure lascia il riquadro "Risultati da inserire"
 - [ ] Aggiungi il CV: `public/cv/riccardo-bedogni-cv.pdf` (il pulsante compare da solo).
 - [ ] Copertine mancanti: screenshot Streamlit (RAG), dashboard Smart Parking.
 - [ ] `npm run lint && npm run check && npm run build` senza errori.

@@ -63,12 +63,10 @@ export function initPointCloud(root: HTMLElement) {
     if (!o) return [];
 
     const fontSize = parseFloat(getComputedStyle(title).fontSize);
-    // denser sampling on small screens so the name stays legible
-    const step = Math.max(2, Math.round(fontSize / 38));
-    // small type needs tighter, bigger dots to stay legible
-    const small = fontSize < 80;
-    const jitter = step * (small ? 0.5 : 1.1);
-    const dot = small ? [0.75, 0.45] : [0.45, 0.5];
+    // dense sampling and slightly overlapping dots: the name must read at a glance
+    const step = Math.max(2, Math.floor(fontSize / 48));
+    const jitter = step * 0.6;
+    const dot = [0.85, 0.45];
     const out: Pt[] = [];
 
     lines.forEach((line, li) => {
@@ -82,13 +80,25 @@ export function initPointCloud(root: HTMLElement) {
       const contentH = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
       const lineH = parseFloat(cs.lineHeight) || r.height;
       const baseline = r.top - rootRect.top + (lineH - contentH) / 2 + m.fontBoundingBoxAscent;
-      o.fillText(line.textContent ?? '', r.left - rootRect.left, baseline);
+      // match the CSS letter-spacing, otherwise the sampled name comes out wider
+      // than the real text underneath it
+      const ctxWithSpacing = o as CanvasRenderingContext2D & { letterSpacing?: string };
+      if ('letterSpacing' in ctxWithSpacing) ctxWithSpacing.letterSpacing = cs.letterSpacing;
+      const text = line.textContent ?? '';
+      const drawn = o.measureText(text).width;
+      // fallback for engines without canvas letterSpacing: squeeze to the DOM width
+      const sx = drawn > 0 ? Math.min(1.05, Math.max(0.9, r.width / drawn)) : 1;
+      const x0 = r.left - rootRect.left;
+      o.setTransform(sx, 0, 0, 1, x0 * (1 - sx), 0);
+      o.fillText(text, x0, baseline);
+      o.setTransform(1, 0, 0, 1, 0, 0);
+      if ('letterSpacing' in ctxWithSpacing) ctxWithSpacing.letterSpacing = '0px';
 
       const data = o.getImageData(0, 0, off.width, off.height).data;
       const isAccent = line.dataset.pcLine === 'accent';
       for (let y = 0; y < off.height; y += step) {
         for (let x = 0; x < off.width; x += step) {
-          if (data[(y * off.width + x) * 4 + 3] > 140) {
+          if (data[(y * off.width + x) * 4 + 3] > 110) {
             out.push({
               x: Math.random() * width,
               y: Math.random() * height,

@@ -9,7 +9,7 @@
   "nav": {
     "trajectory": "Traiettoria",
     "work": "Lavori",
-    "thesis": "Tesi",
+    "thesis": "Ricerca",
     "method": "Metodo",
     "toolkit": "Strumenti",
     "contact": "Contatti",
@@ -39,7 +39,7 @@
     },
     "thesis": {
       "index": "03",
-      "title": "Tesi"
+      "title": "Ricerca"
     },
     "method": {
       "index": "04",

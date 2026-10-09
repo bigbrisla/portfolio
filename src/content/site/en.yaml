@@ -21,17 +21,11 @@ trajectory:
       place: OT Consulting · Reggio Emilia
       text: >-
         Python and Vue.js day to day, plus machine-learning work.
-    - when: 2026
-      title: Thesis on schema matching
-      place: Supervised by Prof. Beneventano
-      text: >-
-        Making clinical databases talk to each other when their codes are almost — but not
-        exactly — the same. More in the thesis section.
     - when: Dec 2026
       title: MSc in Computer Engineering
       place: University of Modena and Reggio Emilia
       text: >-
-        Expected graduation, with a thesis in data integration.
+        Expected graduation, in the final stretch of the degree.
 
 work:
   intro: >-
@@ -44,7 +38,7 @@ work:
   demoSoon: Demo link coming soon
 
 thesis:
-  kicker: Schema matching & data integration
+  kicker: University project · Schema matching & data integration
   title: Two hospitals, one patient, slightly different codes.
   paragraphs:
     - >-
@@ -58,13 +52,13 @@ thesis:
       when it was stage 4: a neighbouring concept, not a typo. To an exact comparison those two are
       as different as "kidney disease" and "broken arm".
     - >-
-      My thesis treats the vocabulary as what it is, a hierarchy. Two codes are similar if they are
+      The project treats the vocabulary as what it is, a hierarchy. Two codes are similar if they are
       close in that tree. I built a way to generate realistic near-miss errors on OMOP-CDM data and a
       matcher that compares values by meaning instead of by spelling, then measured both against
       exact matching on the Valentine benchmark framework.
   demoTitle: Try it
   demoNote: >-
-    Toy example to show the idea, not thesis results. Raise the noise: exact matching loses the
+    Toy example to show the idea, not project results. Raise the noise: exact matching loses the
     diagnosis columns, semantic matching keeps them.
   link: The code behind it
 

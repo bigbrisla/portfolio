@@ -1,10 +1,10 @@
 ---
 title: Schema matching tassonomico su OMOP-CDM
-pitch: Il codice della mia tesi. Quando i codici clinici sono "quasi giusti", il confronto esatto perde colonne che stanno chiaramente insieme. Una similarità costruita sulla gerarchia SNOMED le ritrova.
+pitch: Un progetto universitario di data integration. Quando i codici clinici sono "quasi giusti", il confronto esatto perde colonne che stanno chiaramente insieme. Una similarità costruita sulla gerarchia SNOMED le ritrova.
 tier: standard
 order: 4
 year: 2026
-kind: Data integration · Ricerca di tesi
+kind: Data integration · Progetto universitario
 stack: [Python, pandas, Valentine, OMOP-CDM, SNOMED, BigQuery]
 repo: https://github.com/bigbrisla/omop-taxonomic-schema-matching
 metrics: []
@@ -34,4 +34,4 @@ L'esperimento misura la Recall@ground truth media dei matcher esatto, semantico 
 
 ## Contesto
 
-È il nucleo di ricerca della mia tesi magistrale all'Università di Modena e Reggio Emilia, con relatore il Prof. Beneventano. La [sezione Tesi](/it/#thesis) spiega l'idea senza gergo tecnico.
+Un progetto universitario all'Università di Modena e Reggio Emilia. La [sezione Ricerca](/it/#thesis) spiega l'idea senza gergo tecnico.

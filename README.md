@@ -3,7 +3,7 @@
 Personal portfolio of Riccardo Bedogni: AI Engineer, Data & ML.
 Static site, bilingual (English at `/`, Italian at `/it/`), light/dark theme, command palette (⌘K / Ctrl+K / `/`).
 
-**Concept: "Latent Space".** The thread running through it is _similarity_. The name in the hero is a point cloud sampled from the real `<h1>`. Projects live as points in a space, the command palette ranks results by similarity, and the thesis section shows two schemas whose columns match by meaning instead of by spelling.
+**Concept: "Latent Space".** The thread running through it is _similarity_. The name in the hero is a point cloud sampled from the real `<h1>`. Projects live as points in a space, the command palette ranks results by similarity, and the research section shows two schemas whose columns match by meaning instead of by spelling.
 
 ## Stack
 
@@ -33,13 +33,13 @@ Node 22 (any ≥ 18.20 works).
 
 ## Editing content (no code needed)
 
-| What                                                               | Where                                                                             |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| Home page copy: hero, trajectory, thesis, method, toolkit, contact | `src/content/site/en.yaml`, `src/content/site/it.yaml`                            |
-| Projects (one file per project per language, same filename)        | `src/content/projects/en/*.md`, `src/content/projects/it/*.md`                    |
-| Small UI strings: nav, buttons, palette, meta descriptions         | `src/i18n/en.json`, `src/i18n/it.json`                                            |
-| Email, LinkedIn, GitHub, CV path                                   | `src/lib/site.ts`                                                                 |
-| Project figures                                                    | `src/assets/projects/<slug>/`, referenced from frontmatter `cover` or in Markdown |
+| What                                                                                | Where                                                                             |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Home page copy: hero, trajectory, research (OMOP project), method, toolkit, contact | `src/content/site/en.yaml`, `src/content/site/it.yaml`                            |
+| Projects (one file per project per language, same filename)                         | `src/content/projects/en/*.md`, `src/content/projects/it/*.md`                    |
+| Small UI strings: nav, buttons, palette, meta descriptions                          | `src/i18n/en.json`, `src/i18n/it.json`                                            |
+| Email, LinkedIn, GitHub, CV path                                                    | `src/lib/site.ts`                                                                 |
+| Project figures                                                                     | `src/assets/projects/<slug>/`, referenced from frontmatter `cover` or in Markdown |
 
 **Project frontmatter.** `tier` is `featured` (the one large card), `standard`, `compact` or `upcoming`. `order` sets the position. `metrics` holds up to 4 headline numbers, and every number must come from a file listed in `sources`. The schema is in `src/content.config.ts`, and the build fails if a file doesn't match.
 

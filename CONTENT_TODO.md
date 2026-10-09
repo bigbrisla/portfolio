@@ -11,6 +11,11 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 - [ ] Cosa posso dire pubblicamente del lavoro in OT Consulting (tipo di progetti, uso quotidiano dell'AI). Oggi la Traiettoria dice solo "Python e Vue.js tutti i giorni, più le attività di machine learning".
 - [ ] Frase hero: "I build systems that find what's similar — and measure whether they're right." / "Costruisco sistemi che trovano ciò che si somiglia, e misuro se hanno ragione."
 
+### Correzioni applicate
+
+- [x] Il lavoro OMOP / schema matching è un **progetto universitario, non la tesi**. L'ho tolto dalla Traiettoria, la sezione "Tesi" è diventata "Ricerca" / "Research" e la pagina del progetto non parla più di tesi né di relatore. La sezione mantiene l'ancora `#thesis` per non rompere i link interni.
+- [ ] Se più avanti vuoi aggiungere la tesi vera (argomento e relatore), basta un nuovo punto in `trajectory.steps` di `src/content/site/*.yaml`.
+
 ### Testi scritti da me da confermare (sezioni della home)
 
 - [ ] **Metodo → "Come uso l'AI nel lavoro"**: i due paragrafi e i tre principi descrivono un uso quotidiano di Claude Code (pair programming, diff piccoli e riletti, verifica dei numeri sulla fonte). È una bozza plausibile ma riguarda le tue abitudini: correggila in `method.ai` di `src/content/site/*.yaml`.
@@ -18,11 +23,11 @@ Regola: nessun dato inventato. Se manca, resta segnaposto e finisce qui.
 - [ ] **Contatti**: "Disponibile per parlare di ruoli in AI engineering e data/ML, collaborazioni di ricerca…". È corretto dire che sei aperto a nuovi ruoli? Se no, togli quella parte.
 - [ ] **Traiettoria → intro**: "Ingegnere informatico di formazione, AI applicata di mestiere…".
 - [ ] **Strumenti**: elenco ricavato dai repo (requirements, import, Makefile, report LaTeX) più Vue.js e Claude Code dal brief. Vuoi aggiungere altro, ad esempio Docker, cloud o SQL specifici?
-- [ ] **Demo tesi**: i nomi delle diagnosi nell'esempio giocattolo sono in inglese anche nella pagina italiana (termini medici). Dimmi se li vuoi tradotti.
+- [ ] **Demo nella sezione Ricerca**: i nomi delle diagnosi nell'esempio giocattolo sono in inglese anche nella pagina italiana (termini medici). Dimmi se li vuoi tradotti.
 
 ### Per progetto
 
-- [ ] **OMOP / tesi**: numeri finali di Recall@ground truth (esatto / semantico / ibrido × rumore 0,2–1,0). Oggi la pagina mostra il riquadro "Risultati da inserire".
+- [ ] **OMOP (progetto universitario)**: numeri finali di Recall@ground truth (esatto / semantico / ibrido × rumore 0,2–1,0). Oggi la pagina mostra il riquadro "Risultati da inserire".
 - [ ] **OMOP**: il README cita `min_depth=4` come esempio, mentre l'esperimento principale (`phase3_universal.py`) usa `MIN_DEPTH = 2` e una soglia di 0,45. Nel testo ho descritto il filtro senza indicare il valore.
 - [ ] **HR**: in `general_data.csv` **2.912 righe su 4.410 sono profili duplicati** (identici a parte l'EmployeeID; solo 1.498 profili distinti). Con lo split casuale 70/30 i duplicati finiscono sia in train sia in test, e questo spiega quasi certamente il 98–99% di Random Forest e XGBoost (la logistica fa 0,86). Sul sito **non** riporto quelle accuracy. Proposta: rifare la valutazione con deduplica o split per profilo, oppure presentare il progetto solo per feature engineering + SHAP (come ora).
 - [ ] **HR**: il README dice "sei algoritmi", il notebook importa anche GaussianNB. È un progetto individuale o di un corso/gruppo? Il PDF `HR_CASE_STUDY_TRUE.pdf` fa pensare a una consegna d'esame.

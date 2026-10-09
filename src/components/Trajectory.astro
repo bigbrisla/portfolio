@@ -9,7 +9,7 @@ const { copy } = Astro.props;
   {copy.intro}
 </p>
 
-<ol class="traj">
+<ol class="traj" style={`--steps: ${copy.steps.length}`}>
   {copy.steps.map((s, i) => (
     <li class="traj__step" data-reveal style={`--reveal-i: ${i}`}>
       <span class="traj__node" aria-hidden="true" />
@@ -26,7 +26,7 @@ const { copy } = Astro.props;
     --node: 11px;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--steps, 4), 1fr);
     gap: var(--s-6);
     margin: 0;
     padding: 0;

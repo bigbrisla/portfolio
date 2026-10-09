@@ -21,17 +21,11 @@ trajectory:
       place: OT Consulting · Reggio Emilia
       text: >-
         Python e Vue.js tutti i giorni, più le attività di machine learning.
-    - when: 2026
-      title: Tesi sullo schema matching
-      place: Relatore Prof. Beneventano
-      text: >-
-        Far dialogare database clinici quando i loro codici sono quasi, ma non del tutto, uguali.
-        Ne parlo nella sezione Tesi.
     - when: Dic 2026
       title: Laurea Magistrale in Ingegneria Informatica
       place: Università di Modena e Reggio Emilia
       text: >-
-        Laurea prevista, con una tesi sulla data integration.
+        Laurea prevista, all'ultimo tratto del percorso.
 
 work:
   intro: >-
@@ -44,7 +38,7 @@ work:
   demoSoon: Link alla demo in arrivo
 
 thesis:
-  kicker: Schema matching e data integration
+  kicker: Progetto universitario · Schema matching e data integration
   title: Due ospedali, un paziente, codici leggermente diversi.
   paragraphs:
     - >-
@@ -58,13 +52,13 @@ thesis:
       cronica, stadio 5" quando era stadio 4: un concetto vicino, non un refuso. Per un confronto
       esatto quei due codici sono diversi quanto "malattia renale" e "frattura del braccio".
     - >-
-      La mia tesi tratta il vocabolario per quello che è, una gerarchia: due codici sono simili se
+      Il progetto tratta il vocabolario per quello che è, una gerarchia: due codici sono simili se
       sono vicini nell'albero. Ho costruito un modo per generare errori realistici "di prossimità" su
       dati OMOP-CDM e un matcher che confronta i valori per significato e non per grafia, e ho misurato
       entrambi contro il confronto esatto sul framework di benchmark Valentine.
   demoTitle: Provalo
   demoNote: >-
-    Esempio giocattolo per mostrare l'idea, non risultati della tesi. Alza il rumore: il confronto
+    Esempio giocattolo per mostrare l'idea, non risultati del progetto. Alza il rumore: il confronto
     esatto perde le colonne delle diagnosi, quello semantico le tiene.
   link: Il codice dietro
 
