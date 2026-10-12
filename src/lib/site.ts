@@ -3,7 +3,7 @@
  * Google Search Console, "HTML tag" method: paste only the content="..." value.
  * Empty = no tag is emitted.
  */
-export const GOOGLE_SITE_VERIFICATION = '';
+export const GOOGLE_SITE_VERIFICATION = 'VLj7G6pzJb0bOFYJL8f9SkhjE0eQbipYK_UudjT0Wh0';
 
 export const LINKS = {
   email: 'riccardobedogni03@gmail.com',
