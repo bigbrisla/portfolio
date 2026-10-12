@@ -1,4 +1,10 @@
 /** Public identity and links — single source for components, SEO and the command palette. */
+/**
+ * Google Search Console, "HTML tag" method: paste only the content="..." value.
+ * Empty = no tag is emitted.
+ */
+export const GOOGLE_SITE_VERIFICATION = '';
+
 export const LINKS = {
   email: 'riccardobedogni03@gmail.com',
   linkedin: 'https://www.linkedin.com/in/riccardo-bedogni-73a757257/',
@@ -9,6 +15,8 @@ export const LINKS = {
 
 export const PERSON = {
   name: 'Riccardo Bedogni',
+  givenName: 'Riccardo',
+  familyName: 'Bedogni',
   jobTitle: 'AI Engineer',
   location: 'Reggio Emilia, Italy',
   university: 'University of Modena and Reggio Emilia',
